@@ -13,7 +13,10 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class DonorCapesTickHandler implements ITickHandler {
 
 	private static final Minecraft mc = Minecraft.getMinecraft();
@@ -21,7 +24,6 @@ public class DonorCapesTickHandler implements ITickHandler {
 
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) {
-
 		// will not run if there is no world, and if there are player entities in the playerEntities list.
 		if ((mc.theWorld != null) && (mc.theWorld.playerEntities.size() > 0)) {
 
@@ -37,19 +39,20 @@ public class DonorCapesTickHandler implements ITickHandler {
 					// get the player from the players list.
 					EntityPlayer player = players.get(counter);
 					String oldCloak = player.playerCloakUrl;
-
+					
 					if(player.playerCloakUrl.startsWith("http://skins.minecraft.net/MinecraftCloaks/")) {
-
+					
+						String lowerUsername = player.username.toLowerCase();
+						
 						for(String s : instance.testerUsers) {
-							if(s.equals("JadarMC")) {
-
+							if(s.equals(lowerUsername)) {
 								// set the cloak url of the player
 								player.cloakUrl = (player.playerCloakUrl = instance.testerCape);
 							}
 						}
 
 						for(String s : instance.donorUsers) {
-							if(s.equals(player.username)) {
+							if(s.equals(lowerUsername)) {
 
 								// set the cloak url of the player
 								player.cloakUrl = (player.playerCloakUrl = instance.donorCape);
@@ -59,6 +62,7 @@ public class DonorCapesTickHandler implements ITickHandler {
 						// if the set cloak does not equal the old cloak then download the cloak.
 						if ( player.playerCloakUrl != oldCloak & player.cloakUrl != oldCloak) {
 							// download the cloak. the second arguement is an image buffer that makes sure the cape is the right dimensions.
+							System.out.println(player.playerCloakUrl);
 							mc.renderEngine.obtainImageData(player.playerCloakUrl, new ImageBufferDownload());
 						}
 					}

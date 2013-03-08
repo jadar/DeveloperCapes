@@ -12,7 +12,9 @@ import java.util.ArrayList;
 
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public final class DonorCapesAPI {
 
 	public static DonorCapesAPI instance;
@@ -41,6 +43,7 @@ public final class DonorCapesAPI {
 			String line;
 
 			while((line = reader.readLine()) != null) {
+				line = line.toLowerCase();
 				if(line.startsWith("donor:")) {
 					DonorCapesAPI.donorUsers.add(line.substring(7));
 				}
