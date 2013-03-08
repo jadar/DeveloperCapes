@@ -1,4 +1,5 @@
-#SampleCapesFile. Upload this to a dropbox or file server. not like #mediafire, but one you can read in your browser.
+#SampleCapesFile. Upload this to a dropbox or file server. not like 
+#mediafire, but one you can read in your browser.
 
-donor: username1
+developer: username1
 tester: username2
