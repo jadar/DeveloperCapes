@@ -8,7 +8,7 @@ Use this to add tester or donor only capes to your mod!
 
 
 #Usage:
-For now, make a new method in your CommonProxy and ClientProxy classes called capesInit or something. Leave the Common one blank and put this in the ClientProxy one. We do this so it only executes on client side.
+For now, make a new method in your CommonProxy and ClientProxy classes called capesInit or something. Leave the Common one blank and put this in the ClientProxy one. We do this so it only executes on client side. Put this in it.
 
 ```java
 DonorCapesAPI.init(*CAPES TXT*, 
@@ -16,7 +16,7 @@ DonorCapesAPI.init(*CAPES TXT*,
 	*TESTER CAPE URL*);
 ```
 
-Then in your preInit or init method in your main mod class just class that capesInit method.
+Then in your preInit or init method in your main mod class just call the capesInit method.
 
 The capes txt is a text file hosted on a server (or Dropbox) that has all the users you want to have capes in. The layout looks like this
 ```
