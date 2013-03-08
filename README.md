@@ -25,4 +25,4 @@ tester: username4
 ```
 Make sure to have the space between ':' and the username.
 
-#The cape image files are 22x17, and should be of the PNG format.
+The cape image files are 22x17, and should be of the PNG format.
