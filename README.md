@@ -1,18 +1,18 @@
-DonorCapesAPI
+DeveloperCapesAPI
 =============
 
 ##Version: 1.1
 
-A Minecraft API for adding Donor/Tester only capes!
-Use this to add tester or donor only capes to your mod!
+A Minecraft API for adding Developer/Tester only capes!
+Use this to add tester or Developer only capes to your mod!
 
 
 #Usage:
 For now, make a new method in your CommonProxy and ClientProxy classes called capesInit or something (Or just use your registerRenderInformation sort of method). Leave the Common one blank and put this in the ClientProxy one. We do this so it only executes on client side. Put this in it.
 
 ```java
-DonorCapesAPI.init(*CAPES TXT*, 
-	*DONOR CAPE URL*,
+DeveloperCapesAPI.init(*CAPES TXT*, 
+	*Developer CAPE URL*,
 	*TESTER CAPE URL*);
 ```
 
@@ -20,8 +20,8 @@ Then in your preInit or init method in your main mod class just call the capesIn
 
 The capes txt is a text file hosted on a server (or Dropbox) that has all the users you want to have capes in. The layout looks like this
 ```
-donor: username1
-donor: username2
+developer: username1
+developer: username2
 tester: username3
 tester: username4
 ```
