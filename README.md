@@ -1,4 +1,4 @@
-mDonorCapesAPI
+DonorCapesAPI
 =============
 
 ##Version: 1.1
