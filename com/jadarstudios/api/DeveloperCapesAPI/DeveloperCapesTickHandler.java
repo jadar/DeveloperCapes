@@ -1,8 +1,8 @@
 /**
  * Copyright (c) Jadar, 2013
- * Donor Capes API by Jadar
+ * Developer Capes API by Jadar
  */
-package com.jadarstudios.api.DonorCapesAPI;
+package com.jadarstudios.api.DeveloperCapesAPI;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -17,10 +17,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class DonorCapesTickHandler implements ITickHandler {
+public class DeveloperCapesTickHandler implements ITickHandler {
 
 	private static final Minecraft mc = Minecraft.getMinecraft();
-	private static final DonorCapesAPI instance = DonorCapesAPI.getInstance();
+	private static final DeveloperCapesAPI instance = DeveloperCapesAPI.getInstance();
 
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) {
@@ -28,6 +28,7 @@ public class DonorCapesTickHandler implements ITickHandler {
 		if ((mc.theWorld != null) && (mc.theWorld.playerEntities.size() > 0)) {
 
 			// grabs a list of all the players, and the world.
+			@SuppressWarnings("unchecked")
 			List<EntityPlayer> players = mc.theWorld.playerEntities;
 
 			// the loops that goes through each player
@@ -51,11 +52,11 @@ public class DonorCapesTickHandler implements ITickHandler {
 							}
 						}
 
-						for(String s : instance.donorUsers) {
+						for(String s : instance.devUsers) {
 							if(s.equals(lowerUsername)) {
 
 								// set the cloak url of the player
-								player.cloakUrl = (player.playerCloakUrl = instance.donorCape);
+								player.cloakUrl = (player.playerCloakUrl = instance.devCape);
 							}
 						}
 
@@ -85,7 +86,7 @@ public class DonorCapesTickHandler implements ITickHandler {
 
 	@Override
 	public String getLabel() {
-		return "DonorCapesTickHandler";
+		return "DeveloperCapesTickHandler";
 	}
 
 }
