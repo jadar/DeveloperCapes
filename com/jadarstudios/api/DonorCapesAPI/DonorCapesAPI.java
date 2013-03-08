@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) Jadar, 2013
+ * Donor Capes API by Jadar
+ */
 package com.jadarstudios.api.DonorCapesAPI;
 
 import java.io.BufferedReader;
