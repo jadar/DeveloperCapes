@@ -18,10 +18,10 @@ DonorCapesAPI.init(*CAPES TXT*,
 
 The capes txt is a text file hosted on a server (or Dropbox) that has all the users you want to have capes in. The layout looks like this
 
-donor: username1
-donor: username2
-tester: username3
-tester: username4
+donor: username1\n
+donor: username2\n
+tester: username3\n
+tester: username4\n
 
 Make sure to have the space between ':' and the username.
 
