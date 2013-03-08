@@ -9,54 +9,69 @@ import java.util.ArrayList;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-public class DonorCapesAPI {
-	
-	private static DonorCapesAPI instance;
-	
-	public ArrayList<String> donorUsers;
-	public ArrayList<String> testerUsers;
-	
+public final class DonorCapesAPI {
 
-	private DonorCapesAPI() {
+	public static DonorCapesAPI instance;
+
+	public static ArrayList<String> donorUsers;
+	public static ArrayList<String> testerUsers;
+	public static String donorCape = "";
+	public static String testerCape = "";
+
+	/**
+	 * Object constructor.
+	 * 
+	 * @param parTxtUrl
+	 * @param parDonorCape
+	 * @param parTesterCape
+	 */
+	private DonorCapesAPI(String parTxtUrl, String parDonorCape, String parTesterCape) {
 		donorUsers = new ArrayList<String>();
 		testerUsers = new ArrayList<String>();
-	}
-	
-	
-	public static DonorCapesAPI getInstance() {
-		if(instance == null) {
-			instance = new DonorCapesAPI();
-		}
-		
-		return instance;
-	}
-	
-	
-	public void init(String par1String) {
-		
+		donorCape = parDonorCape;
+		testerCape = parTesterCape;
+
 		try {
-
-			URL url = new URL(par1String);
+			URL url = new URL(parTxtUrl);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-
 			String line;
 
 			while((line = reader.readLine()) != null) {
 				if(line.startsWith("donor:")) {
-					donorUsers.add(line.substring(7));
+					DonorCapesAPI.donorUsers.add(line.substring(7));
 				}
 
 				if(line.startsWith("tester:")) {
-					testerUsers.add(line.substring(8));
+					DonorCapesAPI.testerUsers.add(line.substring(8));
 				}
 			}
 		}
 		catch(IOException x) {
-			
 		}
-	
-		TickRegistry.registerTickHandler(new DonorCapesTickHandler(), Side.CLIENT);
-	
-	
 	}
+
+	/**
+	 * Set up capes.
+	 * 
+	 * @param parTxtUrl
+	 * @param parDonorCape
+	 * @param parTesterCape
+	 */
+	public static void init(String parTxtUrl, String parDonorCape, String parTesterCape) {
+		// if no instance is created, make a new instance and register tick handler.
+		if(getInstance() == null) {
+			instance = new DonorCapesAPI(parTxtUrl, parDonorCape, parTesterCape);
+		}
+
+		TickRegistry.registerTickHandler(new DonorCapesTickHandler(), Side.CLIENT);
+
+	}
+
+	public static DonorCapesAPI getInstance() {
+		if(instance == null) {
+			return null;
+		}
+		return instance;
+	}
+
 }
