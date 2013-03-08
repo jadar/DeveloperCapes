@@ -1,4 +1,4 @@
-DonorCapesAPI
+mDonorCapesAPI
 =============
 
 ##Version: 1.1
@@ -8,7 +8,7 @@ Use this to add tester or donor only capes to your mod!
 
 
 #Usage:
-For now, make a new method in your CommonProxy and ClientProxy classes called capesInit or something. Leave the Common one blank and put this in the ClientProxy one. We do this so it only executes on client side. Put this in it.
+For now, make a new method in your CommonProxy and ClientProxy classes called capesInit or something (Or just use your registerRenderInformation sort of method). Leave the Common one blank and put this in the ClientProxy one. We do this so it only executes on client side. Put this in it.
 
 ```java
 DonorCapesAPI.init(*CAPES TXT*, 
