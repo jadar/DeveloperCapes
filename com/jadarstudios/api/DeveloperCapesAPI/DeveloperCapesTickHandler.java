@@ -2,7 +2,7 @@
  * Copyright (c) Jadar, 2013
  * Developer Capes API by Jadar
  * 
- * version 1.1
+ * version 1.2
  */
 package com.jadarstudios.api.DeveloperCapesAPI;
 
