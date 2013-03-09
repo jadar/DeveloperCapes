@@ -44,18 +44,23 @@ public class DeveloperCapesTickHandler implements ITickHandler {
 					// get the player from the players list.
 					EntityPlayer player = players.get(counter);
 					String oldCloak = player.playerCloakUrl;
+					
+					// make it equal the old cloak so it has something to revert to if the player in question is not in the HashMap.
+					String groupUrl = oldCloak;
 
 					if(player.playerCloakUrl.startsWith("http://skins.minecraft.net/MinecraftCloaks/")) {
-
 						// lowercase username, so no problems with case.
 						String lowerUsername = player.username.toLowerCase();
 						
-						// get the user from the hash map and get the cape url.
-						DeveloperCapesUser hashUser = (DeveloperCapesUser)instance.getUser(player.username);
-						String groupUrl = instance.getGroupUrl(hashUser.getGroup());
-
-						// set cape url.
-						player.playerCloakUrl = (player.cloakUrl = groupUrl);
+						if(instance.getUser(lowerUsername) != null) {
+							
+							// get the user from the hash map and get the cape url.
+							DeveloperCapesUser hashUser = (DeveloperCapesUser)instance.getUser(lowerUsername);
+							groupUrl = instance.getGroupUrl(hashUser.getGroup());
+							
+							// set cape url.
+							player.playerCloakUrl = (player.cloakUrl = groupUrl);
+						}
 
 						// if the set cloak does not equal the old cloak then download the cloak.
 						if ( player.playerCloakUrl != oldCloak & player.cloakUrl != oldCloak) {

@@ -22,7 +22,6 @@ public class DeveloperCapesUser {
 	}
 	
 	public String getGroup() {
-		System.out.println(this.group);
 		return this.group;
 	}
 }
