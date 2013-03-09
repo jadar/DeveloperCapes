@@ -1,5 +1,7 @@
 #SampleCapesFile. Upload this to a dropbox or file server. not like 
 #mediafire, but one you can read in your browser.
 
-developer: username1
-tester: username2
+developer=http://www.myurl.com/DEV_CAPE.png
+developer=username1
+tester=http://www.myurl.com/TESTER_CAPE.png
+tester=username2

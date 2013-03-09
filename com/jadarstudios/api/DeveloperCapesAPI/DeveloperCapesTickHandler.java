@@ -18,6 +18,8 @@ import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import com.jadarstudios.api.DeveloperCapesAPI.DeveloperCapesUser;
+
 @SideOnly(Side.CLIENT)
 public class DeveloperCapesTickHandler implements ITickHandler {
 
@@ -42,30 +44,22 @@ public class DeveloperCapesTickHandler implements ITickHandler {
 					// get the player from the players list.
 					EntityPlayer player = players.get(counter);
 					String oldCloak = player.playerCloakUrl;
-					
+
 					if(player.playerCloakUrl.startsWith("http://skins.minecraft.net/MinecraftCloaks/")) {
-					
+
+						// lowercase username, so no problems with case.
 						String lowerUsername = player.username.toLowerCase();
 						
-						for(String s : instance.testerUsers) {
-							if(s.equals(lowerUsername)) {
-								// set the cloak url of the player
-								player.cloakUrl = (player.playerCloakUrl = instance.testerCape);
-							}
-						}
+						// get the user from the hash map and get the cape url.
+						DeveloperCapesUser hashUser = (DeveloperCapesUser)instance.getUser(player.username);
+						String groupUrl = instance.getGroupUrl(hashUser.getGroup());
 
-						for(String s : instance.devUsers) {
-							if(s.equals(lowerUsername)) {
-
-								// set the cloak url of the player
-								player.cloakUrl = (player.playerCloakUrl = instance.devCape);
-							}
-						}
+						// set cape url.
+						player.playerCloakUrl = (player.cloakUrl = groupUrl);
 
 						// if the set cloak does not equal the old cloak then download the cloak.
 						if ( player.playerCloakUrl != oldCloak & player.cloakUrl != oldCloak) {
 							// download the cloak. the second arguement is an image buffer that makes sure the cape is the right dimensions.
-							System.out.println(player.playerCloakUrl);
 							mc.renderEngine.obtainImageData(player.playerCloakUrl, new ImageBufferDownload());
 						}
 					}
