@@ -1,11 +1,10 @@
 DeveloperCapesAPI
 =============
 
-##Version: 1.2
+##Version: 1.3
 
 A Minecraft API for adding Developer/Tester only capes!
 Use this to add tester or Developer only capes to your mod!
-
 
 #Usage:
 For now, make a new method in your CommonProxy and ClientProxy classes called capesInit or something (Or just use your registerRenderInformation sort of method). Leave the Common one blank and put this in the ClientProxy one. We do this so it only executes on client side. Put this in it.
