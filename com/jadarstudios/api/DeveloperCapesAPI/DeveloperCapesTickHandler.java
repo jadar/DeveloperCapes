@@ -59,7 +59,7 @@ public class DeveloperCapesTickHandler implements ITickHandler {
 							groupUrl = instance.getGroupUrl(hashUser.getGroup());
 							
 							// set cape url.
-							player.cloakUrl = (player.cloakUrl = groupUrl);
+							player.cloakUrl = groupUrl;
 						}
 
 						// if the set cloak does not equal the old cloak then download the cloak.
