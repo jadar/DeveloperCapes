@@ -11,8 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashMap;
 
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -23,8 +22,8 @@ public final class DeveloperCapesAPI {
 
 	public static DeveloperCapesAPI instance;
 
-	private static ConcurrentHashMap<String, DeveloperCapesUser> users;
-	private static ConcurrentHashMap<String, String> groupUrls;
+	private HashMap<String, DeveloperCapesUser> users;
+	private HashMap<String, String> groupUrls;
 
 	/**
 	 * Object constructor.
@@ -34,8 +33,8 @@ public final class DeveloperCapesAPI {
 	 * @param parTesterCape
 	 */
 	private DeveloperCapesAPI(String parTxtUrl) {
-		users = new ConcurrentHashMap<String, DeveloperCapesUser>();
-		groupUrls = new ConcurrentHashMap<String, String>();
+		users = new HashMap<String, DeveloperCapesUser>();
+		groupUrls = new HashMap<String, String>();
 	}
 
 	public static DeveloperCapesAPI getInstance() {
@@ -51,7 +50,7 @@ public final class DeveloperCapesAPI {
 	 * 
 	 * @param parTxtUrl
 	 */
-	public static void init(String parTxtUrl) {
+	public void init(String parTxtUrl) {
 		// if no instance is created, make a new instance and register tick handler.
 		if(getInstance() == null) {
 			instance = new DeveloperCapesAPI(parTxtUrl);
@@ -92,6 +91,7 @@ public final class DeveloperCapesAPI {
 			}
 		}
 		catch(IOException x) {
+			x.printStackTrace();
 		}
 
 
@@ -105,7 +105,7 @@ public final class DeveloperCapesAPI {
 	 * @param parUsername
 	 * @param parGroup
 	 */
-	public static void addUser(String parUsername, String parGroup) {
+	public void addUser(String parUsername, String parGroup) {
 		if(getUser(parUsername) == null) {
 			users.put(parUsername, (new DeveloperCapesUser(parUsername, parGroup)));
 
@@ -117,7 +117,7 @@ public final class DeveloperCapesAPI {
 	 * @param parUsername
 	 * @return
 	 */
-	public static DeveloperCapesUser getUser(String parUsername)  {
+	public DeveloperCapesUser getUser(String parUsername)  {
 		return users.get(parUsername.toLowerCase());
 	}
 
@@ -126,7 +126,7 @@ public final class DeveloperCapesAPI {
 	 * @param parGroup
 	 * @param parCapeUrl
 	 */
-	public static void addGroupUrl(String parGroup, String parCapeUrl) {
+	public void addGroupUrl(String parGroup, String parCapeUrl) {
 		if(getGroupUrl(parGroup) == null) {
 			groupUrls.put(parGroup, parCapeUrl);
 
@@ -138,7 +138,7 @@ public final class DeveloperCapesAPI {
 	 * @param group
 	 * @return
 	 */
-	public static String getGroupUrl(String group) {
+	public String getGroupUrl(String group) {
 		return groupUrls.get(group);
 	}
 }
