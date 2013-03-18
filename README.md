@@ -10,7 +10,7 @@ Use this to add tester or Developer only capes to your mod!
 For now, make a new method in your CommonProxy and ClientProxy classes called capesInit or something (Or just use your registerRenderInformation sort of method). Leave the Common one blank and put this in the ClientProxy one. We do this so it only executes on client side. Put this in it.
 
 ```java
-DeveloperCapesAPI.init(*CAPES TXT*);
+DeveloperCapesAPI.getInstance().init(*CAPES TXT*);
 ```
 
 Then in your preInit or init method in your main mod class just call the capesInit method.

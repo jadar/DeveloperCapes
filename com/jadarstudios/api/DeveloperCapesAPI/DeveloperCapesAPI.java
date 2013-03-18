@@ -32,14 +32,14 @@ public final class DeveloperCapesAPI {
 	 * @param parDeveloperCape
 	 * @param parTesterCape
 	 */
-	private DeveloperCapesAPI(String parTxtUrl) {
+	private DeveloperCapesAPI() {
 		users = new HashMap<String, DeveloperCapesUser>();
 		groupUrls = new HashMap<String, String>();
 	}
 
 	public static DeveloperCapesAPI getInstance() {
 		if(instance == null) {
-			return null;
+			return new DeveloperCapesAPI();
 		}
 		return instance;
 	}
@@ -51,11 +51,6 @@ public final class DeveloperCapesAPI {
 	 * @param parTxtUrl
 	 */
 	public void init(String parTxtUrl) {
-		// if no instance is created, make a new instance and register tick handler.
-		if(getInstance() == null) {
-			instance = new DeveloperCapesAPI(parTxtUrl);
-		}
-
 		try {
 			URL url = new URL(parTxtUrl);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
