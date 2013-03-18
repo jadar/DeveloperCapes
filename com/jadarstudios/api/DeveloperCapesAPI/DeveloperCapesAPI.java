@@ -20,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public final class DeveloperCapesAPI {
 
-	public static DeveloperCapesAPI instance;
+	private static DeveloperCapesAPI instance;
 
 	private HashMap<String, DeveloperCapesUser> users;
 	private HashMap<String, String> groupUrls;
@@ -39,7 +39,7 @@ public final class DeveloperCapesAPI {
 
 	public static DeveloperCapesAPI getInstance() {
 		if(instance == null) {
-			return new DeveloperCapesAPI();
+			instance = new DeveloperCapesAPI();
 		}
 		return instance;
 	}
@@ -73,12 +73,12 @@ public final class DeveloperCapesAPI {
 							
 							if(subLine.startsWith("http")) {
 								capeUrl = subLine;
-								instance.addGroupUrl(group, capeUrl);
+								getInstance().addGroupUrl(group, capeUrl);
 								continue;
 							}
 							else {
 								username = subLine.toLowerCase();
-								instance.addUser(username, group);
+								getInstance().addUser(username, group);
 							}
 						}
 					}
@@ -88,7 +88,6 @@ public final class DeveloperCapesAPI {
 		catch(IOException x) {
 			x.printStackTrace();
 		}
-
 
 		// set up tick handler for capes.
 		TickRegistry.registerTickHandler(new DeveloperCapesTickHandler(), Side.CLIENT);
