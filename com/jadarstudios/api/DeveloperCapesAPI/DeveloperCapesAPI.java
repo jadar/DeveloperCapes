@@ -3,7 +3,7 @@
  * Developer Capes API by Jadar
  * License: Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
- * version 1.3
+ * version 1.3.1
  */
 package com.jadarstudios.api.DeveloperCapesAPI;
 
@@ -25,6 +25,8 @@ public final class DeveloperCapesAPI {
 	private HashMap<String, DeveloperCapesUser> users;
 	private HashMap<String, String> groupUrls;
 
+	private boolean tickSetUp = false;
+	
 	/**
 	 * Object constructor.
 	 * 
@@ -89,9 +91,12 @@ public final class DeveloperCapesAPI {
 			x.printStackTrace();
 		}
 
-		// set up tick handler for capes.
-		TickRegistry.registerTickHandler(new DeveloperCapesTickHandler(), Side.CLIENT);
-
+		// make sure to set up only one tick handler.
+		if(!tickSetUp) {
+			// set up tick handler for capes.
+			TickRegistry.registerTickHandler(new DeveloperCapesTickHandler(), Side.CLIENT);
+			tickSetUp = true;
+		}
 	}
 
 	/**
