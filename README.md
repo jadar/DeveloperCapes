@@ -1,7 +1,7 @@
 DeveloperCapesAPI
 =============
 
-##Version: 1.3
+##Version: 1.3.1
 
 A Minecraft API for adding Developer/Tester only capes!
 Use this to add tester or Developer only capes to your mod!
