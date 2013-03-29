@@ -63,7 +63,7 @@ public final class DeveloperCapesAPI {
 			String capeUrl = "";
 
 			while((line = reader.readLine()) != null) {
-				line = line.toLowerCase();
+				
 				// excludes commented lines
 				if(!line.startsWith("#")) {
 					// loops through characters.
@@ -128,7 +128,6 @@ public final class DeveloperCapesAPI {
 	public void addGroupUrl(String parGroup, String parCapeUrl) {
 		if(getGroupUrl(parGroup) == null) {
 			groupUrls.put(parGroup, parCapeUrl);
-
 		}
 	}
 
