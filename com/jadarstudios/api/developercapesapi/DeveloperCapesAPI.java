@@ -5,7 +5,7 @@
  * 
  * version 1.3.1
  */
-package com.jadarstudios.api.DeveloperCapesAPI;
+package com.jadarstudios.api.developercapesapi;
 
 import java.io.BufferedReader;
 import java.io.IOException;
