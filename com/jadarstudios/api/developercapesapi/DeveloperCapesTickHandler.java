@@ -5,7 +5,7 @@
  * 
  * version 1.3.1
  */
-package com.jadarstudios.api.DeveloperCapesAPI;
+package com.jadarstudios.api.developercapesapi;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -19,7 +19,7 @@ import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import com.jadarstudios.api.DeveloperCapesAPI.DeveloperCapesUser;
+import com.jadarstudios.api.developercapesapi.DeveloperCapesUser;
 
 @SideOnly(Side.CLIENT)
 public class DeveloperCapesTickHandler implements ITickHandler {
@@ -46,7 +46,7 @@ public class DeveloperCapesTickHandler implements ITickHandler {
 					EntityPlayer player = players.get(counter);
 
 					if(player.cloakUrl.startsWith("http://skins.minecraft.net/MinecraftCloaks/")) {
-						//lowercase username, so no problems with case.
+						// lower case username, so no problems with case.
 						String lowerUsername = player.username.toLowerCase();
 						
 						if(instance.getUser(lowerUsername) != null) {
@@ -62,8 +62,8 @@ public class DeveloperCapesTickHandler implements ITickHandler {
 							player.cloakUrl = groupUrl;
 						
 							// if the set cloak does not equal the old cloak then download the cloak.
-							if ( player.cloakUrl != oldCloak & player.cloakUrl != oldCloak) {
-								// download the cloak. the second arguement is an image buffer that makes sure the cape is the right dimensions.
+							if ( player.cloakUrl != oldCloak) {
+								// download the cloak. the second argument is an image buffer that makes sure the cape is the right dimensions.
 								mc.renderEngine.obtainImageData(player.cloakUrl, new ImageBufferDownload());
 							}
 						}
