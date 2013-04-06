@@ -50,7 +50,6 @@ public class DeveloperCapesTickHandler implements ITickHandler {
 						String lowerUsername = player.username.toLowerCase();
 						
 						if(instance.getUser(lowerUsername) != null) {
-							System.out.println("\n\n\nRAN\n\n\n");
 							
 							String oldCloak = player.cloakUrl;
 							
