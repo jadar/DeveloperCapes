@@ -11,15 +11,12 @@ import java.util.EnumSet;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ImageBufferDownload;
 import net.minecraft.entity.player.EntityPlayer;
 
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import com.jadarstudios.api.developercapesapi.DeveloperCapesUser;
 
 @SideOnly(Side.CLIENT)
 public class DeveloperCapesTickHandler implements ITickHandler {
@@ -49,22 +46,19 @@ public class DeveloperCapesTickHandler implements ITickHandler {
 						// lower case username, so no problems with case.
 						String lowerUsername = player.username.toLowerCase();
 						
-						if(instance.getUser(lowerUsername) != null) {
-							
-							String oldCloak = player.cloakUrl;
+						if(instance.getUserGroup(lowerUsername) != null) {
 							
 							// get the user from the hash map and get the cape url.
-							DeveloperCapesUser hashUser = (DeveloperCapesUser)instance.getUser(lowerUsername);
-							String groupUrl = instance.getGroupUrl(hashUser.getGroup());
+							String userGroup = instance.getUserGroup(lowerUsername);
+							String groupUrl = instance.getGroupUrl(userGroup);
 							
-							// set cape url.
-							player.cloakUrl = groupUrl;
-						
-							// if the set cloak does not equal the old cloak then download the cloak.
-							if ( player.cloakUrl != oldCloak) {
-								// download the cloak. the second argument is an image buffer that makes sure the cape is the right dimensions.
-								mc.renderEngine.obtainImageData(player.cloakUrl, new ImageBufferDownload());
+							// set cape url. checks if old playerCloakUrl is null, if it isnt it sets it also.
+							if(player.playerCloakUrl == null) {
+								player.cloakUrl = groupUrl;
+							} else {
+								player.playerCloakUrl = player.cloakUrl = groupUrl;
 							}
+							
 						}
 					}
 				}

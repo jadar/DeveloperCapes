@@ -13,6 +13,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ImageBufferDownload;
+
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,7 +25,9 @@ public final class DeveloperCapesAPI {
 
 	private static DeveloperCapesAPI instance;
 
-	private HashMap<String, DeveloperCapesUser> users;
+	private static final Minecraft mc = Minecraft.getMinecraft();
+	
+	private HashMap<String, String> users;
 	private HashMap<String, String> groupUrls;
 
 	private boolean tickSetUp = false;
@@ -35,7 +40,7 @@ public final class DeveloperCapesAPI {
 	 * @param parTesterCape
 	 */
 	private DeveloperCapesAPI() {
-		users = new HashMap<String, DeveloperCapesUser>();
+		users = new HashMap<String, String>();
 		groupUrls = new HashMap<String, String>();
 	}
 
@@ -61,7 +66,7 @@ public final class DeveloperCapesAPI {
 			String username = "";
 			String group = "";
 			String capeUrl = "";
-
+			System.out.println(parTxtUrl);
 			while((line = reader.readLine()) != null) {
 				
 				// excludes commented lines
@@ -76,6 +81,8 @@ public final class DeveloperCapesAPI {
 							if(subLine.startsWith("http")) {
 								capeUrl = subLine;
 								getInstance().addGroupUrl(group, capeUrl);
+								mc.renderEngine.obtainImageData(capeUrl, new ImageBufferDownload());
+								System.out.println(capeUrl);
 								continue;
 							}
 							else {
@@ -92,10 +99,10 @@ public final class DeveloperCapesAPI {
 		}
 
 		// make sure to set up only one tick handler.
-		if(!tickSetUp) {
+		if(!instance.tickSetUp) {
 			// set up tick handler for capes.
 			TickRegistry.registerTickHandler(new DeveloperCapesTickHandler(), Side.CLIENT);
-			tickSetUp = true;
+			instance.tickSetUp = true;
 		}
 	}
 
@@ -105,8 +112,8 @@ public final class DeveloperCapesAPI {
 	 * @param parGroup
 	 */
 	public void addUser(String parUsername, String parGroup) {
-		if(getUser(parUsername) == null) {
-			users.put(parUsername, (new DeveloperCapesUser(parUsername, parGroup)));
+		if(getUserGroup(parUsername) == null) {
+			users.put(parUsername, parGroup);
 
 		}
 	}
@@ -116,7 +123,7 @@ public final class DeveloperCapesAPI {
 	 * @param parUsername
 	 * @return
 	 */
-	public DeveloperCapesUser getUser(String parUsername)  {
+	public String getUserGroup(String parUsername)  {
 		return users.get(parUsername.toLowerCase());
 	}
 
