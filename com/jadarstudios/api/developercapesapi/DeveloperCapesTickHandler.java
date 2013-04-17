@@ -53,12 +53,7 @@ public class DeveloperCapesTickHandler implements ITickHandler {
 							String groupUrl = instance.getGroupUrl(userGroup);
 							
 							// set cape url. checks if old playerCloakUrl is null, if it isnt it sets it also.
-							if(player.playerCloakUrl == null) {
-								player.cloakUrl = groupUrl;
-							} else {
-								player.playerCloakUrl = player.cloakUrl = groupUrl;
-							}
-							
+							player.cloakUrl = groupUrl;
 						}
 					}
 				}
