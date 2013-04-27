@@ -13,7 +13,6 @@ import java.net.URL;
 import java.util.HashMap;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ImageBufferDownload;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -66,7 +65,7 @@ public final class DeveloperCapesAPI {
             String username = "";
             String group = "";
             String capeUrl = "";
-            // System.out.println(parTxtUrl);
+            
             while ((line = reader.readLine()) != null){
 
                 // excludes commented lines
@@ -81,8 +80,7 @@ public final class DeveloperCapesAPI {
                             if (subLine.startsWith("http")){
                                 capeUrl = subLine;
                                 getInstance().addGroupUrl(group, capeUrl);
-                                mc.renderEngine.obtainImageData(capeUrl, new ImageBufferDownload());
-                                // System.out.println(capeUrl);
+                                mc.renderEngine.obtainImageData(capeUrl, new DeveloperCapesImageBufferDownload());
                                 continue;
                             }else{
                                 username = subLine.toLowerCase();
