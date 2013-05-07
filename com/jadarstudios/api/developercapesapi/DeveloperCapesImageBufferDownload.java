@@ -20,7 +20,7 @@ public class DeveloperCapesImageBufferDownload implements IImageBuffer {
 		}
 		else {
 			this.imageWidth = (par1BufferedImage.getWidth((ImageObserver)null) <= 64) ? 64: (par1BufferedImage.getWidth((ImageObserver)null));
-			this.imageHeight = (par1BufferedImage.getHeight((ImageObserver)null) <= 32) ? 32: (par1BufferedImage.getWidth((ImageObserver)null));
+			this.imageHeight = (par1BufferedImage.getHeight((ImageObserver)null) <= 32) ? 32: (par1BufferedImage.getHeight((ImageObserver)null));
 			
 			BufferedImage capeImage = new BufferedImage(this.imageWidth, this.imageHeight, 2);
 			
