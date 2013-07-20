@@ -1,4 +1,9 @@
-package com.jadarstudios.api.developercapesapi;
+/**
+ * Developer Capes by Jadar
+ * License: Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * version 2.0
+ */
+package com.jadarstudios.developercapes;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -9,11 +14,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class DeveloperCapesImageBufferDownload implements IImageBuffer {
+public class DevCapesImageBufferDownload implements IImageBuffer {
 	
 	private int imageWidth;
 	private int imageHeight;
 	
+	@Override
 	public BufferedImage parseUserSkin(BufferedImage par1BufferedImage) {
 		if (par1BufferedImage == null) {
 			return null;
