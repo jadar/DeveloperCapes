@@ -6,7 +6,7 @@ Developer Capes
 A Minecraft library for adding Developer/Tester only capes!
 Use this to add tester or developer only capes to your mod!
 
-*Note: Previously called DeveloperCapesAPI, DeveloperCapes was renamed because Jadar realized he was stupid and finally figured out what an API is.*
+*Note: Previously called DeveloperCapesAPI, DeveloperCapes was renamed because Jadar realized he was stupid. And that this is a library.*
 
 ### Table of Contents  
 [Links](#links)
@@ -64,3 +64,8 @@ you do not conflict with other mods using the library as well.
 
 
 The cape image files are 22x17, and should be of the PNG format. Additionally, Developer Capes supports high definition capes. Those must be of the size that is divisible by 16. The height must be half of the width. So 1024x512, 2048x1024, and so on. Host them on a server, Dropbox, or GitHub. 
+
+<a name="building"/>
+###Building:
+
+To build a 
