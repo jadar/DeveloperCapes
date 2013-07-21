@@ -1,35 +1,45 @@
 Developer Capes
 =============
 
-##Version: 2.0
+####Version: 2.0
 
 A Minecraft library for adding Developer/Tester only capes!
 Use this to add tester or developer only capes to your mod!
 
-##### Table of Contents  
-[Getting Started](#Getting Started)  
-[Guide: Set up with Source Code:](#Guide: Set up with Source Code:)  
-[Guide: Set up with Source Code:](#Guide: Set up with Source Code:)  
-[Usage](#Usage)  
+### Table of Contents  
+[Getting Started](#gettingStarted)  
+[Guide: Set up with Pre-Compiled Jar](#guideJar)  
+[Guide: Set up with Source Code](#guideSourceCode)  
+[Usage](#usage)  
 
-#Getting Started:
-There are 2 ways to use DeveloperCapes.
+<a name="gettingStarted"/>
+###Getting Started:
+There are 2 ways to add Developer Capes to your classpath.
 
-1) Download a pre-compiled version from Jenkins. You are going to have to add it to your project classpath, and the MCP mods directory. To release just put the DeveloperCapes jar in your jar. Guide.
-2) Download the source code from GitHub and add it to your project. To test with MCP you will have to add an argument to the Virtaul Machine to work correctly.  Guide.
+1. Download a pre-compiled version from Jenkins. You are going to have to add it to your project classpath, and the MCP mods directory. To release just put the DeveloperCapes jar in your jar. [Guide](#guideJar)
+2. Download the source code from GitHub and add it to your project. To test with MCP you will have to add an argument to the Virtaul Machine to work correctly.  [Guide](#guideSourceCode)
 
-#Guide: Set up with Source Code:
+<a name="guideJar"/>
+###Guide: Set up with Pre-Compiled Jar:
 
-#Guide: Set up with Pre-Compiled Jar:
+Download the pre-compiled jar from Jekins.
 
-#Usage:
+####Setting up build environment.
+You are going to want to 
+
+
+<a name="guideSourceCode"/>
+###Guide: Set up with Source Code:
+
+<a name="usage"/>
+###Usage:
+
+Once Developer Capes is in your classpath somehow, you are going to want to add this to your mod when it initilizes.
 ```java
-DeveloperCapesAPI.getInstance().init(*CAPES TXT*);
+DevcCapesUtil.getInstance().addTxtUrl(*CAPES FILE URL*);
 ```
 
-Then in your preInit or init method in your main mod class just call the capesInit method.
-
-The capes.txt is a text file hosted on a server, Dropbox, or GitHub that has all the users you want to have capes in. It also has all the cape urls in it. The layout looks like this
+The "*CAPES FILE URL*" is the URL to a text file hosted on a server, Dropbox, or GitHub that has all the data Developer Capes needs to add your cape. The layout looks like this:
 ```
 developer=http://www.myurl.com/DEV_CAPE.png
 developer=username1
@@ -44,4 +54,4 @@ Also, you should probably make a unique name for your groups so as
 you do not conflict with other mods using the library as well.
 
 
-The cape image files are 22x17, and should be of the PNG format. Host them on a server or Dropbox. Maybe I'll add client hosted capes.
+The cape image files are 22x17, and should be of the PNG format. Additionally, Developer Capes supports high definition capes. Those must be of the size that is divisible by 16. The height must be half of the width. So 1024x512, 2048x1024, and so on. Host them on a server, Dropbox, or GitHub. 
