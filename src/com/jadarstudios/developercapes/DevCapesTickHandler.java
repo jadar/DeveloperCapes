@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Developer Capes by Jadar
  * License: Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * version 2.0
