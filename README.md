@@ -25,8 +25,8 @@ Use this to add tester or developer only capes to your mod!
 ###Getting Started:
 There are 2 ways to add Developer Capes to your classpath.
 
-1. Download a pre-compiled version from Jenkins. You are going to have to add it to your project classpath, and the MCP mods directory. To release just put the DeveloperCapes jar in your jar. [Guide](#guideJar)
-2. Download the source code from GitHub and add it to your project. To test with MCP you will have to add an argument to the Virtaul Machine to work correctly.  [Guide](#guideSourceCode)
+1. Download a pre-compiled version from Jenkins. You are going to have to add it to your project classpath, and the MCP mods directory. To release just put the DeveloperCapes jar in your jar file. [Guide](#guideJar)
+2. Download the source code from GitHub and add it to your project. To test with MCP you will have to add an argument to the Virtual Machine to work correctly.  [Guide](#guideSourceCode)
 
 <a name="guideJar"/>
 ###Guide: Set up with Pre-Compiled Jar:
