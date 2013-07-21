@@ -6,7 +6,7 @@ Developer Capes
 A Minecraft library for adding Developer/Tester only capes!
 Use this to add tester or developer only capes to your mod!
 
-*Note: Previously called DeveloperCapesAPI, DeveloperCapes was renamed because Jadar realized he was stupid. And that this is a library.*
+*Note: Previously called DeveloperCapesAPI, DeveloperCapes was renamed because Jadar realized he was stupid and finally figured out what an API is.*
 
 ### Table of Contents  
 [Links](#links)
