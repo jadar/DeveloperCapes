@@ -40,7 +40,7 @@ There are 2 ways to add Developer Capes to your classpath.
     - Right-click the project your code is in.
     - Navigate to "Build Path -> Configure Build Path."
     - Click "Jars", then "Add Jars."
-    - Add the jar you downloaded that is in the root directory of your project.
+    - Add the jar you download that is in the root directory of your project.
   
     ####Other
     - If you know how to add jars to classpaths on other IDEs, write it up and submit a pull request.
@@ -52,7 +52,7 @@ There are 2 ways to add Developer Capes to your classpath.
 <a name="usage"/>
 ###Usage:
 
-  Once Developer Capes is in your classpath somehow, you are going to want to add this to your mod when it initilizes.  
+  Once Developer Capes is in your classpath somehow, you are going to want to add this to your mod when it initialized.  
 *Note: Does not need to go into a ClientProxy method anymore. Can go anywhere, really.*
 ```java
 DevCapesUtil.getInstance().addTxtUrl($CAPES_TXT_URL);
@@ -68,7 +68,7 @@ tester=username3
 tester=username4
 ```
   Make sure there is no space between '=' and the username or url.
-You can have as many groups as you want. Just name them seperately.
+You can have as many groups as you want. Just name them separately.
 Also, you should probably make a unique name for your groups so as
 you do not conflict with other mods using the library as well.
 
@@ -83,12 +83,13 @@ If you'd like to compile your own jar then you may do so using the provided Ant 
 [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)  
 [Apache Ant](http://ant.apache.org/) (Must be added to your PATH..)  
 Git client  
+Python (Unix-like system only)
 
 #####Performing the build:
 1. Clone this repository to an empty folder, or you may use your existing one.
 2. Open up Command Prompt or a Unix terminal equivalent and change the directory to the base directory where `build.xml` is located.
 3. Execute `ant build`.
-4. The script will now procede to download MCP, decompile Minecraft, patch files, add source, recompile Minecraft, and package a jar.
+4. The script will now proceed to download MCP, decompile Minecraft, patch files, add source, recompile Minecraft, and package a jar.
 5. If you would like to use your own Forge/MCP then in the same directory as `build.xml` make a directory called `currentBuild`. Then add the `forge/` directory to it. It should have the decompiled `mcp/` directory in it.
 
-That should be it. The outputed jar is in `currentBuild\builds`.
+That should be it. The outputted jar is in `currentBuild\builds`.
