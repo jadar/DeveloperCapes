@@ -1,46 +1,35 @@
 <?xml version="1.0" ?> 
 <project name="DeveloperCapes" default="build">
 	
-	<target name="getVersion">
-		<!-- this gets the version -->
-	
-		<script language="javascript">
+	<!-- this gets the version -->	
+	<script language="javascript">
 	 
-			importClass(java.io.File);
-		    importClass(java.io.FileReader);
-	        importClass(java.io.BufferedReader);
-			importClass(java.io.FileWriter);
-		    importClass(java.io.BufferedWriter);
+		importClass(java.io.File);
+		importClass(java.io.FileReader);
+	    importClass(java.io.BufferedReader);
+		importClass(java.io.FileWriter);
+		importClass(java.io.BufferedWriter);
 	 
-	        echo = project.createTask("echo");
- 	        echo.setMessage("Parsing properties");
- 	        echo.perform();
+	    var file = new File("version.json");
+	    fr = new FileReader(file);
+	    br = new BufferedReader(fr);
 	 
-	        var file = new File("version.json");
-	        fr = new FileReader(file);
-	        br = new BufferedReader(fr);
+	    // Read the file. 
+	    // This assumes the file has no line breaks and is one line.	
+		var json = "";
+		var string = ""
+		while((string = br.readLine()) != null) {
+			json += string;
+		}
 	 
-	        // Read the file. 
-	        // This assumes the file has no line breaks and is one line.	
-			var json = "";
-			var string = ""
-			while((string = br.readLine()) != null) {
-				json += string;
-			}
+		// Evaluate the JSON.
+		var struct = eval("(" + json + ")");
 	 
-		    // Evaluate the JSON.
-			var struct = eval("(" + json + ")");
-	 
-		    // Set each property in the project environment.
-			for (i in struct) {
-		        echo = project.createTask("echo");
-				echo.setMessage(i + "=" + struct[i]);
-		        echo.perform();
-		        project.setProperty(i,struct[i]);
-			}
-	 
-		</script>
-	</target>
+		// Set each property in the project environment.
+		for (i in struct) {
+			project.setUserProperty(i, struct[i]);
+		}
+	</script>
 		
 	<property name="minecraftVersion" value="1.6.2"/>
 	<property name="forgeMajorVersion" value="9.10.0"/>
@@ -74,6 +63,10 @@
 		<unzip src="${dir.downloads}/minecraftforge-src-${forgeVersion}.zip" dest="${dir.currentBuild}" />
 	</target>
 	
+	<target name="addPatches">
+		<copy todir="${dir.forge}/patches/minecraft/net/minecraft/client/entity/" file="AbstractClientPlayer.java.patch" />
+	</target>
+	
 	<target name="decompile">
 		<echo message="Installing Forge and decompiling Minecraft..." />
 		<exec dir="${dir.forge}" executable="cmd" osfamily="windows">
@@ -86,20 +79,16 @@
 	
 	<target name="prep">
 		<antcall target="clean" />
-		<antcall target="getVersion" />
 			
 		<mkdir dir="${dir.currentBuild}" />
 		
 		<antcall target="getForge"/>
+		<antcall target="addPatches" />
 		<antcall target="decompile"/>
 
 		<copy todir="${dir.mcp}/src/minecraft">
 			<fileset dir="src" excludes="META-INF/"/>
 		</copy>
-	</target>
-	
-	<target name="patchFiles">
-		<patch patchfile="AbstractClientPlayer.java.patch" originalfile="${dir.mcp}/src/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java" />
 	</target>
 	
 	<target name="recompile">
@@ -123,7 +112,6 @@
 	<target name="build">
 		<antcall target="clean" />
 		<antcall target="prep" />
-		<antcall target="patchFiles" />
 		<antcall target="recompile" />		
 		<antcall target="reobfuscate" />
 		

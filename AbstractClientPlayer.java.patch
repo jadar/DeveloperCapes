@@ -1,5 +1,5 @@
---- AbstractClientPlayer.java	2013-07-21 09:15:36.000000000 -0500
-+++ AbstractClientPlayer.java	2013-07-20 15:29:36.000000000 -0500
+--- ../src_base/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java
++++ ../src_work/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java
 @@ -18,9 +18,9 @@
  {
      public static final ResourceLocation field_110314_b = new ResourceLocation("textures/entity/steve.png");
