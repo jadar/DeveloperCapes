@@ -1,0 +1,202 @@
+<?xml version="1.0" ?> 
+<project name="DeveloperCapes" default="build">
+	
+	<target name="getVersion">
+		<!-- this gets the version -->
+	
+		<script language="javascript">
+	 
+			importClass(java.io.File);
+		    importClass(java.io.FileReader);
+	        importClass(java.io.BufferedReader);
+			importClass(java.io.FileWriter);
+		    importClass(java.io.BufferedWriter);
+	 
+	        echo = project.createTask("echo");
+ 	        echo.setMessage("Parsing properties");
+ 	        echo.perform();
+	 
+	        var file = new File("version.json");
+	        fr = new FileReader(file);
+	        br = new BufferedReader(fr);
+	 
+	        // Read the file. 
+	        // This assumes the file has no line breaks and is one line.	
+			var json = "";
+			var string = ""
+			while((string = br.readLine()) != null) {
+				json += string;
+			}
+	 
+		    // Evaluate the JSON.
+			var struct = eval("(" + json + ")");
+	 
+		    // Set each property in the project environment.
+			for (i in struct) {
+		        echo = project.createTask("echo");
+				echo.setMessage(i + "=" + struct[i]);
+		        echo.perform();
+		        project.setProperty(i,struct[i]);
+			}
+	 
+		</script>
+	</target>
+		
+	<property name="minecraftVersion" value="1.6.2"/>
+	<property name="forgeMajorVersion" value="9.10.0"/>
+	<property name="forgeBuild" value="800"/>
+	<property name="forgeVersion" value="${minecraftVersion}-${forgeMajorVersion}.${forgeBuild}" />
+	<property name="forgeUrl" value="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${forgeVersion}.zip"/>
+		
+	<property environment="env" />
+	<property name="buildNumber" value="${env.BUILD_NUMBER}"/>
+	
+	<condition property="isJenkins">
+		<equals arg1="${buildNumber}" arg2="" />
+	</condition>
+		
+	<property name="dir.currentBuild" value="currentBuild/"/>
+	<property name="dir.forge" value="${dir.currentBuild}/forge/" />
+	<property name="dir.mcp" value="${dir.forge}/mcp/"/>
+	<property name="dir.mcp.output" value="${dir.mcp}/reobf/minecraft"/>
+	<property name="dir.src" value="src/"/>
+	<property name="dir.builds" value="${dir.currentBuild}/builds"/>
+	<property name="dir.downloads" value="${dir.currentBuild}/downloads"/>
+	
+	<available file="${dir.forge}" property="forge-available" />
+	<available file="${dir.mcp}" property="mcp-available" />
+	<available file="${dir.mcp}/runtime/recompile.py" property="mcp-available2" />
+
+	<target name="getForge" unless="forge-available">
+		<echo message="Downloading Forge..." />
+		<mkdir dir="${dir.downloads}"/>
+		<get src="${forgeUrl}" dest="${dir.downloads}" />
+		<unzip src="${dir.downloads}/minecraftforge-src-${forgeVersion}.zip" dest="${dir.currentBuild}" />
+	</target>
+	
+	<target name="decompile">
+		<echo message="Installing Forge and decompiling Minecraft..." />
+		<exec dir="${dir.forge}" executable="cmd" osfamily="windows">
+			<arg line="/c install.cmd" />
+		</exec>
+		<exec dir="${dir.forge}" executable="bash" osfamily="unix">
+			<arg line="./install.sh" />
+		</exec>
+	</target>
+	
+	<target name="prep">
+		<antcall target="clean" />
+		<antcall target="getVersion" />
+			
+		<mkdir dir="${dir.currentBuild}" />
+		
+		<antcall target="getForge"/>
+		<antcall target="decompile"/>
+
+		<copy todir="${dir.mcp}/src/minecraft">
+			<fileset dir="src" excludes="META-INF/"/>
+		</copy>
+	</target>
+	
+	<target name="patchFiles">
+		<patch patchfile="AbstractClientPlayer.java.patch" originalfile="${dir.mcp}/src/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java" />
+	</target>
+	
+	<target name="recompile">
+		<exec dir="${dir.mcp}" executable="cmd" osfamily="windows">
+			<arg line="/c recompile.bat" />
+		</exec>
+		<exec dir="${dir.mcp}" executable="bash" osfamily="unix">
+			<arg line="recompile.sh" />
+		</exec>
+	</target>
+
+	<target name="reobfuscate">
+		<exec dir="${dir.mcp}" executable="cmd" osfamily="windows">
+			<arg line="/c reobfuscate.bat" />
+		</exec>
+		<exec dir="${dir.mcp}" executable="bash" osfamily="unix">
+			<arg line="reobfuscate.sh" />
+		</exec>
+	</target>
+	
+	<target name="build">
+		<antcall target="clean" />
+		<antcall target="prep" />
+		<antcall target="patchFiles" />
+		<antcall target="recompile" />		
+		<antcall target="reobfuscate" />
+		
+		<antcall target="package" />
+		<antcall target="packageJenkins" />
+			
+		<antcall target="clean" />
+	</target>
+	
+	<target name="packageJenkins" if="isJenkins">
+		<!-- not using makeBuildDir because jenkins pulls everything out of there, we don't want old builds then. -->
+		<delete dir="${dir.builds}"/>
+		<mkdir dir="${dir.builds}" />
+				
+		<property name="fileName" value="DevCapes-${version}-${minecraftVersion}-build-${buildNumber}.jar"/>
+
+		<jar destfile="${dir.builds}/${fileName}">
+			<fileset dir="${dir.mcp}/reobf/minecraft" includes="com/" />
+			<fileset dir="${dir.src}/" includes="META-INF/" />
+		</jar>
+	</target>
+	
+	<target name="package" unless="isJenkins">
+		<antcall target="makeBuildDir" />
+		
+		<property name="fileName" value="DevCapes-${version}-${minecraftVersion}-ant.jar"/>
+
+		<jar destfile="${dir.builds}/${fileName}">
+			<fileset dir="${dir.mcp}/reobf/minecraft" includes="com/" />
+			<fileset dir="${dir.src}/" includes="META-INF/" />
+		</jar>
+	</target>
+	
+	<target name="packageSource" unless="isJenkins">
+		<antcall target="makeBuildDir" />
+				
+		<property name="fileName" value="DevCapes-${version}-${minecraftVersion}-ant.jar"/>
+
+		<jar destfile="${dir.builds}/${fileName}">
+			<fileset dir="${dir.mcp}/reobf/minecraft" includes="com/" />
+			<fileset dir="${dir.src}/" includes="META-INF/" />
+		</jar>
+	</target>
+	
+	<target name="packageSourceJenkins" if="isJenkins">
+			<antcall target="makeBuildDir" />
+					
+			<property name="fileName" value="DevCapes-${version}-${minecraftVersion}-ant.jar"/>
+
+			<jar destfile="${dir.builds}/${fileName}">
+				<fileset dir="${dir.mcp}/reobf/minecraft" includes="com/" />
+				<fileset dir="${dir.src}/" includes="META-INF/" />
+			</jar>
+		</target>
+		
+	<target name="makeBuildDir" unless="buildDir-available">
+		<mkdir dir="${dir.builds}" />
+	</target>
+	
+	<target name="clean">
+		<delete dir="${dir.mcp}/src/minecraft/com"/>
+		<delete dir="${dir.mcp}/reobf/minecraft"/>
+		<delete dir="${dir.downloads}" />
+		<antcall target="deleteMCP" />
+	</target>
+	
+	<target name="deleteMCP" unless="mcp-available2">
+		<delete dir="${dir.mcp}" />
+	</target>
+	
+	<target name="reallyClean">
+		<antcall target="clean" />
+		<delete dir="${dir.currentBuild}" />
+	</target>
+	
+</project>
