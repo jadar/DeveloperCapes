@@ -31,11 +31,18 @@ There are 2 ways to add Developer Capes to your classpath.
 <a name="guideJar"/>
 ###Guide: Set up with Pre-Compiled Jar:
 
-Download the pre-compiled jar from Jekins.
-
-####Setting up build environment.
-You are going to want to 
-
+1. Download the pre-compiled jar from Jekins.
+2. You are going to want to put the jar at the root of your code directory.
+3. Add the jar to your classpath.
+  
+    ####Eclipse
+    - Right-click the project your code is in.
+    - Navigate to "Build Path -> Configure Build Path."
+    - Click "Jars", then "Add Jars."
+    - Add the jar you downloaded that is in the root directory of your project.
+  
+    ####Other
+    - If you know how to add jars to classpaths on other IDEs, write it up and submit a pull request.
 
 <a name="guideSourceCode"/>
 ###Guide: Set up with Source Code:
@@ -45,7 +52,7 @@ You are going to want to
 
 Once Developer Capes is in your classpath somehow, you are going to want to add this to your mod when it initilizes.
 ```java
-DevcCapesUtil.getInstance().addTxtUrl(*CAPES FILE URL*);
+DevCapesUtil.getInstance().addTxtUrl(*CAPES FILE URL*);
 ```
 
 The "*CAPES FILE URL*" is the URL to a text file hosted on a server, Dropbox, or GitHub that has all the data Developer Capes needs to add your cape. The layout looks like this:
@@ -68,4 +75,3 @@ The cape image files are 22x17, and should be of the PNG format. Additionally, D
 <a name="building"/>
 ###Building:
 
-To build a 
