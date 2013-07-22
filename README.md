@@ -52,12 +52,13 @@ There are 2 ways to add Developer Capes to your classpath.
 <a name="usage"/>
 ###Usage:
 
-Once Developer Capes is in your classpath somehow, you are going to want to add this to your mod when it initilizes.
+  Once Developer Capes is in your classpath somehow, you are going to want to add this to your mod when it initilizes.  
+*Note: Does not need to go into a ClientProxy method anymore. Can go anywhere, really.*
 ```java
-DevCapesUtil.getInstance().addTxtUrl(*CAPES FILE URL*);
+DevCapesUtil.getInstance().addTxtUrl($CAPES_TXT_URL);
 ```
 
-The "*CAPES FILE URL*" is the URL to a text file hosted on a server, Dropbox, or GitHub that has all the data Developer Capes needs to add your cape. The layout looks like this:
+`$CAPES_TXT_URL` is the URL to a text file hosted on a server, Dropbox, or GitHub that has all the data Developer Capes needs to add your capes. The layout looks like this:
 ```
 developer=http://www.myurl.com/DEV_CAPE.png
 developer=username1
@@ -66,12 +67,12 @@ tester=http://www.myurl.com/TESTER_CAPE.png
 tester=username3
 tester=username4
 ```
-Make sure there is no space between '=' and the username or url.
+  Make sure there is no space between '=' and the username or url.
 You can have as many groups as you want. Just name them seperately.
 Also, you should probably make a unique name for your groups so as
 you do not conflict with other mods using the library as well.
 
-
+#####Images:
 The cape image files are 22x17, and should be of the PNG format. Additionally, Developer Capes supports high definition capes. Those must be of the size that is divisible by 16. The height must be half of the width. So 1024x512, 2048x1024, and so on. Host them on a server, Dropbox, or GitHub. 
 
 <a name="building"/>
@@ -90,4 +91,4 @@ Git client
 4. The script will now procede to download MCP, decompile Minecraft, patch files, add source, recompile Minecraft, and package a jar.
 5. If you would like to use your own Forge/MCP then in the same directory as `build.xml` make a directory called `currentBuild`. Then add the `forge/` directory to it. It should have the decompiled `mcp/` directory in it.
 
-That should be it. The outputed jar is in `currentBuild\builds`
+That should be it. The outputed jar is in `currentBuild\builds`.
