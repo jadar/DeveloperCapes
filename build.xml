@@ -1,5 +1,5 @@
 <?xml version="1.0" ?> 
-<project name="DeveloperCapes" default="build">
+<project name="DeveloperCapes" default="addPatches">
 	
 	<!-- this gets the version -->	
 	<script language="javascript">
@@ -30,7 +30,7 @@
 			project.setUserProperty(i, struct[i]);
 		}
 	</script>
-		
+	
 	<property name="minecraftVersion" value="1.6.2"/>
 	<property name="forgeMajorVersion" value="9.10.0"/>
 	<property name="forgeBuild" value="800"/>
@@ -44,13 +44,14 @@
 		<equals arg1="${buildNumber}" arg2="" />
 	</condition>
 		
-	<property name="dir.currentBuild" value="currentBuild/"/>
+	<property name="dir.currentBuild" value="${basedir}/currentBuild/"/>
 	<property name="dir.forge" value="${dir.currentBuild}/forge/" />
 	<property name="dir.mcp" value="${dir.forge}/mcp/"/>
 	<property name="dir.mcp.output" value="${dir.mcp}/reobf/minecraft"/>
 	<property name="dir.src" value="src/"/>
 	<property name="dir.builds" value="${dir.currentBuild}/builds"/>
 	<property name="dir.downloads" value="${dir.currentBuild}/downloads"/>
+	<property name="dir.temp" value="${dir.currentBuild}/temp/" />
 	
 	<available file="${dir.forge}" property="forge-available" />
 	<available file="${dir.mcp}" property="mcp-available" />
@@ -64,10 +65,26 @@
 	</target>
 	
 	<target name="addPatches">
-		<copy todir="${dir.forge}/patches/minecraft/net/minecraft/client/entity/" file="AbstractClientPlayer.java.patch" />
+		<!-- <copy todir="${dir.forge}/patches/minecraft/net/minecraft/client/entity/" file="AbstractClientPlayer.java.patch" /> -->
+		<echo message="Fixing Patches" />
+		<mkdir dir="${dir.temp}" />
+		<exec dir="${dir.forge}" executable="cmd" osfamily="windows">
+			<arg line="/c .\fml\python\python_fml ${basedir}\fixpatch.py -i ${basedir}\AbstractClientPlayer.java.patch -o ${dir.temp}\AbstractClientPlayer.java.patch" />
+		</exec>
+		<exec dir="${dir.forge}" executable="bash" osfamily="unix">
+			<arg line="python ${basedir}\fixpatch.py -i ${basedir}\AbstractClientPlayer.java.patch -o ${dir.temp}\AbstractClientPlayer.java.patch" />
+		</exec>
+		
+		<echo message="Patching AbstractClientPlayer.java" />
+			<exec executable="cmd" osfamily="windows">
+				<arg line="/c .\${dir.mcp}\rumtime\bin\applydiff.exe -uf -i ${dir.temp}\AbstractClientPlayer.java.patch ${dir.mcp}\src\minecraft\net\minecraft\client\entity\AbstractClientPlayer.java" />
+			</exec>
+			<exec executable="bash" osfamily="unix">
+				<arg line="patch -uf -i ${dir.temp}/AbstractClientPlayer.java.patch ${dir.mcp}/src/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java" />
+			</exec>
 	</target>
 	
-	<target name="decompile">
+	<target name="decompile" unless="mcp-available">
 		<echo message="Installing Forge and decompiling Minecraft..." />
 		<exec dir="${dir.forge}" executable="cmd" osfamily="windows">
 			<arg line="/c install.cmd" />
@@ -79,13 +96,13 @@
 	
 	<target name="prep">
 		<antcall target="clean" />
-			
+		
 		<mkdir dir="${dir.currentBuild}" />
 		
 		<antcall target="getForge"/>
-		<antcall target="addPatches" />
 		<antcall target="decompile"/>
-
+		<antcall target="addPatches" />
+		
 		<copy todir="${dir.mcp}/src/minecraft">
 			<fileset dir="src" excludes="META-INF/"/>
 		</copy>
@@ -117,7 +134,10 @@
 		
 		<antcall target="package" />
 		<antcall target="packageJenkins" />
-			
+		<antcall target="packageSource" />
+		<antcall target="packageSourceJenkins" />
+		
+		
 		<antcall target="clean" />
 	</target>
 	
@@ -148,11 +168,10 @@
 	<target name="packageSource" unless="isJenkins">
 		<antcall target="makeBuildDir" />
 				
-		<property name="fileName" value="DevCapes-${version}-${minecraftVersion}-ant.jar"/>
+		<property name="fileName" value="DevCapes-${version}-${minecraftVersion}-src.jar"/>
 
 		<jar destfile="${dir.builds}/${fileName}">
-			<fileset dir="${dir.mcp}/reobf/minecraft" includes="com/" />
-			<fileset dir="${dir.src}/" includes="META-INF/" />
+			<fileset dir="${dir.src}" />
 		</jar>
 	</target>
 	
@@ -175,6 +194,7 @@
 		<delete dir="${dir.mcp}/src/minecraft/com"/>
 		<delete dir="${dir.mcp}/reobf/minecraft"/>
 		<delete dir="${dir.downloads}" />
+		<delete dir="${dir.temp}" />
 		<antcall target="deleteMCP" />
 	</target>
 	

@@ -1,4 +1,4 @@
---- ../src_base/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java
+﻿--- ../src_base/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java
 +++ ../src_work/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java
 @@ -18,9 +18,9 @@
  {
