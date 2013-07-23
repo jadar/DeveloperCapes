@@ -3,7 +3,7 @@ Developer Capes
 
 ####Version: 2.0
 
-[![Build Status](http://ci.jadarstudios.com/job/Developer-Capes/badge/icon)](http://ci.jadarstudios.com/job/Developer-Capes/)
+[![Build Status](http://ci.jadarstudios.com/buildStatus/icon?job=Developer-Capes)](http://ci.jadarstudios.com/me/my-views/view/All/job/Developer-Capes/)
 
 A Minecraft library for adding Developer/Tester only capes!
 Use this to add tester or developer only capes to your mod!
@@ -32,7 +32,7 @@ There are 2 ways to add Developer Capes to your classpath.
 <a name="guideJar"/>
 ###Guide: Set up with Pre-Compiled Jar:
 
-1. Download the latest successful pre-compiled jar from [Jekins](http://ci.jadarstudios.com/job/Developer-Capes). [![Build Status](http://ci.jadarstudios.com/job/Developer-Capes/badge/icon)](http://ci.jadarstudios.com/job/Developer-Capes/)
+1. Download the latest successful pre-compiled jar from [Jekins](http://ci.jadarstudios.com/job/Developer-Capes). [![Build Status](http://ci.jadarstudios.com/buildStatus/icon?job=Developer-Capes)](http://ci.jadarstudios.com/me/my-views/view/All/job/Developer-Capes/)
 2. You are going to want to put the jar at the root of your code directory.
 3. Add the jar to your classpath.
   
