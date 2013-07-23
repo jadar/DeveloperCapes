@@ -1,5 +1,5 @@
 <?xml version="1.0" ?> 
-<project name="DeveloperCapes" default="addPatches">
+<project name="DeveloperCapes" default="build">
 	
 	<!-- this gets the version -->	
 	<script language="javascript">
@@ -44,14 +44,14 @@
 		<equals arg1="${buildNumber}" arg2="" />
 	</condition>
 		
-	<property name="dir.currentBuild" value="${basedir}/currentBuild/"/>
-	<property name="dir.forge" value="${dir.currentBuild}/forge/" />
-	<property name="dir.mcp" value="${dir.forge}/mcp/"/>
+	<property name="dir.currentBuild" value="${basedir}/currentBuild"/>
+	<property name="dir.forge" value="${dir.currentBuild}/forge" />
+	<property name="dir.mcp" value="${dir.forge}/mcp"/>
 	<property name="dir.mcp.output" value="${dir.mcp}/reobf/minecraft"/>
 	<property name="dir.src" value="src/"/>
 	<property name="dir.builds" value="${dir.currentBuild}/builds"/>
 	<property name="dir.downloads" value="${dir.currentBuild}/downloads"/>
-	<property name="dir.temp" value="${dir.currentBuild}/temp/" />
+	<property name="dir.temp" value="${dir.currentBuild}/temp" />
 	
 	<available file="${dir.forge}" property="forge-available" />
 	<available file="${dir.mcp}" property="mcp-available" />
@@ -72,16 +72,17 @@
 			<arg line="/c .\fml\python\python_fml ${basedir}\fixpatch.py -i ${basedir}\AbstractClientPlayer.java.patch -o ${dir.temp}\AbstractClientPlayer.java.patch" />
 		</exec>
 		<exec dir="${dir.forge}" executable="bash" osfamily="unix">
-			<arg line="python ${basedir}\fixpatch.py -i ${basedir}\AbstractClientPlayer.java.patch -o ${dir.temp}\AbstractClientPlayer.java.patch" />
+			<arg line="python ${basedir}/fixpatch.py -i ${basedir}/AbstractClientPlayer.java.patch -o ${dir.temp}/AbstractClientPlayer.java.patch" />
 		</exec>
 		
 		<echo message="Patching AbstractClientPlayer.java" />
-			<exec executable="cmd" osfamily="windows">
-				<arg line="/c .\${dir.mcp}\rumtime\bin\applydiff.exe -uf -i ${dir.temp}\AbstractClientPlayer.java.patch ${dir.mcp}\src\minecraft\net\minecraft\client\entity\AbstractClientPlayer.java" />
-			</exec>
-			<exec executable="bash" osfamily="unix">
-				<arg line="patch -uf -i ${dir.temp}/AbstractClientPlayer.java.patch ${dir.mcp}/src/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java" />
-			</exec>
+		<echo message="/c applydiff.exe -uf -i ${dir.temp}/AbstractClientPlayer.java.patch ${dir.mcp}/src/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java" />
+		<exec dir="${dir.mcp}/runtime/bin/" executable="cmd" osfamily="windows">
+			<arg line="/c applydiff.exe -uf -i ${dir.temp}/AbstractClientPlayer.java.patch ${dir.mcp}/src/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java" />
+		</exec>
+		<exec executable="bash" osfamily="unix">
+			<arg line="patch -uf -i ${dir.temp}/AbstractClientPlayer.java.patch ${dir.mcp}/src/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java" />
+		</exec>
 	</target>
 	
 	<target name="decompile" unless="mcp-available">
