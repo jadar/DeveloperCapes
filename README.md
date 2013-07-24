@@ -33,7 +33,8 @@ To start using Developer Capes, [setup your development enviroment](#guideSetUp)
   - If you already have a MANIFEST.MF file, you may merge them. All that you need is the ```FMLCorePlugin: ...``` line. Also, if you already have that line, you may seperate the values by a comma.
 4. Next open up your IDE and refresh the project. You'll notice 3 errors in ```DevCapesTickHandler```. This is normal.
 5. Go into ```DevCapesTickHandler``` and mouse over one of the errors. Click the solution that will change the access of the field in ```AbstractClientPlayer``` to public.
-6. Do this for the other one. There are only 2.
+  - You can also use the included ```patchfiles``` script. Although it does require command line to input a working MCP directory, it will patch ```AbstractClientPlayer.java``` automaticly. Also you're going to want to ```cd``` into the directory that contains the scripts. Usage is ```patchfiles.cmd/.sh <mcp location>```.  
+6. Do this for the other one. There are only 2. 
 7. You are now all set up. Go on to [Usage](#usage) to add cape files.
 
 <a name="usage"/>
