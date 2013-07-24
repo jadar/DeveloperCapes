@@ -5,3 +5,4 @@ com/._.DS_Store
 com/jadarstudios/._.DS_Store
 com/jadarstudios/api/._.DS_Store
 currentBuild/
+tmp/
