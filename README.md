@@ -3,10 +3,9 @@ Developer Capes
 
 ####Version: 2.0
 
-[![Build Status](http://ci.jadarstudios.com/job/Developer-Capes/badge/icon)](http://ci.jadarstudios.com/job/Developer-Capes/)
-
 A Minecraft library for adding Developer/Tester only capes!
 Use this to add tester or developer only capes to your mod!
+Developer Capes reads a text file off a web server, public Dropbox folder, or a raw GitHub file. As long as it is not a download site, (such as MediaFire,) it should work.
 
 *Note: Previously called DeveloperCapesAPI, DeveloperCapes was renamed because Jadar realized he was stupid. And that this is a library.*
 
@@ -24,30 +23,18 @@ Use this to add tester or developer only capes to your mod!
 
 <a name="gettingStarted"/>
 ###Getting Started:
-There are 2 ways to add Developer Capes to your classpath.
+To start using Developer Capes, [setup your development enviroment](#guideSetUp). See [usage](#usage) to find out how to implement the library in your mod. 
 
-1. Download a pre-compiled version from Jenkins. You are going to have to add it to your project classpath, and the MCP mods directory. To release just put the DeveloperCapes jar in your jar file. [Guide](#guideJar)
-2. Download the source code from GitHub and add it to your project. To test with MCP you will have to add an argument to the Virtual Machine to work correctly.  [Guide](#guideSourceCode)
-
-<a name="guideJar"/>
-###Guide: Set up with Pre-Compiled Jar:
-
-1. Download the latest successful pre-compiled jar from [Jekins](http://ci.jadarstudios.com/job/Developer-Capes). [![Build Status](http://ci.jadarstudios.com/job/Developer-Capes/badge/icon)](http://ci.jadarstudios.com/job/Developer-Capes/)
-2. You are going to want to put the jar at the root of your code directory.
-3. Add the jar to your classpath.
-  
-    ####Eclipse
-    - Right-click the project your code is in.
-    - Navigate to "Build Path -> Configure Build Path."
-    - Click "Jars", then "Add Jars."
-    - Add the jar you download that is in the root directory of your project.
-  
-    ####Other
-    - If you know how to add jars to classpaths on other IDEs, write it up and submit a pull request.
-4. You may need to add it to your MCP mods/ directory to test. I'm haven't tested if that is needed, yet.
-
-<a name="guideSourceCode"/>
-###Guide: Set up with Source Code:
+<a name="guideSetUp"/>
+###Setting Up the Development Environment:
+1. Download source code as a zip by clicking "Download Zip" on the right.  
+2. Unzip to a tempory directory. You can delete this once the source is copied.  
+3. Copy everything in src/ to the root of your mod source code. Including ```META-INF/``` and ```META-INF/MANIFEST.MF```.  
+  - If you already have a MANIFEST.MF file, you may merge them. All that you need is the ```FMLCorePlugin: ...``` line. Also, if you already have that line, you may seperate the values by a comma.
+4. Next open up your IDE and refresh the project. You'll notice 3 errors in ```DevCapesTickHandler```. This is normal.
+5. Go into ```DevCapesTickHandler``` and mouse over one of the errors. Click the solution that will change the access of the field in ```AbstractClientPlayer``` to public.
+6. Do this for the other one. There are only 2.
+7. You are now all set up. Go on to [Usage](#usage) to add cape files.
 
 <a name="usage"/>
 ###Usage:
@@ -75,21 +62,11 @@ you do not conflict with other mods using the library as well.
 #####Images:
 The cape image files are 22x17, and should be of the PNG format. Additionally, Developer Capes supports high definition capes. Those must be of the size that is divisible by 16. The height must be half of the width. So 1024x512, 2048x1024, and so on. Host them on a server, Dropbox, or GitHub. 
 
-<a name="building"/>
-###Building:
-If you'd like to compile your own jar then you may do so using the provided Ant build script.
+###Building and Packaging your Mod:
+When you build and package your mod, you're going to want to do a few extra things.
 
-#####Requirements:
-[Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)  
-[Apache Ant](http://ant.apache.org/) (Must be added to your PATH..)  
-Git client  
-Python (Unix-like system only)
+1. Make sure you build with the Developer Capes classes.
+2. When you reobfuscate Minecraft, do not package the obfuscated class. It is the AbstractClientPlayer class that you modified/pathed while setting up the environment for Developer Capes.  
+3. When you package your mod, make sure to include ```META-INF/MANIFEST.MF``. It is how Forge know to load the coremod part of Developer Capes to change the access of fields in ```AbstractClientPlayer```. Otherwise when you run your mod, Minecraft will crash.
 
-#####Performing the build:
-1. Clone this repository to an empty folder, or you may use your existing one.
-2. Open up Command Prompt or a Unix terminal equivalent and change the directory to the base directory where `build.xml` is located.
-3. Execute `ant build`.
-4. The script will now proceed to download MCP, decompile Minecraft, patch files, add source, recompile Minecraft, and package a jar.
-5. If you would like to use your own Forge/MCP then in the same directory as `build.xml` make a directory called `currentBuild`. Then add the `forge/` directory to it. It should have the decompiled `mcp/` directory in it.
-
-That should be it. The outputted jar is in `currentBuild\builds`.
+Thats it! If you have any trouble, make a post in the Minecraft Forums post or make an issue here on GitHub.
