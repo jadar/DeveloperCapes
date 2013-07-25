@@ -43,7 +43,7 @@ To start using Developer Capes, [setup your development enviroment](#guideSetUp)
   Once Developer Capes is in your classpath somehow, you are going to want to add this to your mod when it initialized.  
 *Note: Does not need to go into a ClientProxy method anymore. Can go anywhere, really.*
 ```java
-DevCapesUtil.getInstance().addTxtUrl($CAPES_TXT_URL);
+DevCapesUtil.getInstance().addFileUrl($CAPES_TXT_URL);
 ```
 
 `$CAPES_TXT_URL` is the URL to a text file hosted on a server, Dropbox, or GitHub that has all the data Developer Capes needs to add your capes. The layout looks like this:
