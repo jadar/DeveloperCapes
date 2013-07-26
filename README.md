@@ -12,7 +12,6 @@ Developer Capes reads a text file off a web server, public Dropbox folder, or a 
 ### Table of Contents  
 [Links](#links)  
 [Getting Started](#gettingStarted)  
-[Guide: Set up with Pre-Compiled Jar](#guideJar)  
 [Guide: Set up with Source Code](#guideSourceCode)  
 [Usage](#usage)  
 
