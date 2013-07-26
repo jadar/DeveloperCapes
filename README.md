@@ -29,8 +29,7 @@ To start using Developer Capes, [setup your development enviroment](#guideSetUp)
 ###Setting Up the Development Environment:
 1. Download source code as a zip by clicking "Download Zip" on the right.  
 2. Unzip to a tempory directory. You can delete this once the source is copied.  
-3. Copy everything in src/ to the root of your mod source code. Including ```META-INF/``` and ```META-INF/MANIFEST.MF```.  
-  - If you already have a MANIFEST.MF file, you may merge them. All that you need is the ```FMLCorePlugin: ...``` line. Also, if you already have that line, you may seperate the values by a comma.
+3. Copy everything in src/ to the root of your mod source code.
 4. Next open up your IDE and refresh the project. You'll notice 3 errors in ```DevCapesTickHandler```. This is normal.
 5. Go into ```DevCapesTickHandler``` and mouse over one of the errors. Click the solution that will change the access of the field in ```AbstractClientPlayer``` to public.
   - You can also use the included ```patchfiles``` script. Although it does require command line to input a working MCP directory, it will patch ```AbstractClientPlayer.java``` automaticly. Also you're going to want to ```cd``` into the directory that contains the scripts. Usage is ```patchfiles.cmd/.sh <mcp location>```.  
@@ -68,6 +67,5 @@ When you build and package your mod, you're going to want to do a few extra thin
 
 1. Make sure you build with the Developer Capes classes.
 2. When you reobfuscate Minecraft, do not package the obfuscated class. It is the AbstractClientPlayer class that you modified/pathed while setting up the environment for Developer Capes.  
-3. When you package your mod, make sure to include ```META-INF/MANIFEST.MF``. It is how Forge know to load the coremod part of Developer Capes to change the access of fields in ```AbstractClientPlayer```. Otherwise when you run your mod, Minecraft will crash.
 
 Thats it! If you have any trouble, make a post in the Minecraft Forums post or make an issue here on GitHub.
