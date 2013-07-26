@@ -18,7 +18,6 @@ Developer Capes reads a text file off a web server, public Dropbox folder, or a 
 <a name="links"/>
 ###Links:
 [Minecraft Forum Post](http://www.minecraftforum.net/topic/1725536-151apilibraryforge-developer-capes-api-now-with-hd-cape-support/)  
-[Jenkins Builds](http://ci.jadarstudios.com/job/Developer-Capes)  
 
 <a name="gettingStarted"/>
 ###Getting Started:
