@@ -1,6 +1,6 @@
 /**
- * Developer Capes by Jadar
- * License: Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ * DeveloperCapes by Jadar
+ * License: MIT License (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
  * version 2.0
  */
 package com.jadarstudios.developercapes;
