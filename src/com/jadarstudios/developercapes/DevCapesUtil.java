@@ -213,11 +213,11 @@ public class DevCapesUtil {
 	 */
 	public static ThreadDownloadImageData makeDownloadThread(ResourceLocation par0ResourceLocation, String par1Str, ResourceLocation par2ResourceLocation, IImageBuffer par3IImageBuffer)
 	{
-		TextureManager texturemanager = Minecraft.getMinecraft().func_110434_K();
+		TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
 
 		TextureObject object = new ThreadDownloadImageData(par1Str, par2ResourceLocation, par3IImageBuffer);
 		// Binds ResourceLocation to this.
-		texturemanager.func_110579_a(par0ResourceLocation, object);
+		texturemanager.loadTexture(par0ResourceLocation, object);
 
 		return (ThreadDownloadImageData)object;
 	}
