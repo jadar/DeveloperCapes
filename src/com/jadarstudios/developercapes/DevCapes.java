@@ -19,9 +19,7 @@ import net.minecraft.client.renderer.texture.TextureObject;
 import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 /**
  * This library adds capes for people you specify.
  * Use DevCapesUtil to add your capes if you do not call the addFileUrl method
