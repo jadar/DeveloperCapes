@@ -14,6 +14,8 @@ Developer Capes reads a text file off a web server, public Dropbox folder, or a 
 [Getting Started](#gettingStarted)  
 [Guide: Set up with Source Code](#guideSourceCode)  
 [Usage](#usage)  
+[Building](#building)
+[FAQ](#faq)
 
 <a name="links"/>
 ###Links:
@@ -40,8 +42,9 @@ To start using Developer Capes, [setup your development enviroment](#guideSetUp)
   Once Developer Capes is in your classpath somehow, you are going to want to add this to your mod when it initialized.  
 *Note: Does not need to go into a ClientProxy method anymore. Can go anywhere, really.*
 ```java
-DevCapesUtil.getInstance().addFileUrl($CAPES_TXT_URL);
+DevCapesUtil..addFileUrl($CAPES_TXT_URL);
 ```
+*Note: Do not call DevCapeUtil.getInstance() as it is deprecated and should not be used unless you know what you're doing. It'll throw an Exception if you're on a server and not calling from a client proxy class, or checking for server/client side.*
 
 `$CAPES_TXT_URL` is the URL to a text file hosted on a server, Dropbox, or GitHub that has all the data Developer Capes needs to add your capes. The layout looks like this:
 ```
@@ -60,6 +63,7 @@ you do not conflict with other mods using the library as well.
 #####Images:
 The cape image files are 22x17, and should be of the PNG format. Additionally, Developer Capes supports high definition capes. Those must be of the size that is divisible by 16. The height must be half of the width. So 1024x512, 2048x1024, and so on. Host them on a server, Dropbox, or GitHub. 
 
+<a name="building">
 ###Building and Packaging your Mod:
 When you build and package your mod, you're going to want to do a few extra things.
 
@@ -67,3 +71,12 @@ When you build and package your mod, you're going to want to do a few extra thin
 2. When you reobfuscate Minecraft, do not package the obfuscated class. It is the AbstractClientPlayer class that you modified/pathed while setting up the environment for Developer Capes.  
 
 Thats it! If you have any trouble, make a post in the Minecraft Forums post or make an issue here on GitHub.
+
+<a name="faq">
+###FAQ:
+####1. I'm getting a NullPointerException when starting a dedicated server:
+You're probably trying to register a file url in a way that is not recommended. Use DevCapesUtil.addFileUrl() instead!
+If that's not what you're doing then make an issue on GitHub.
+
+####2. I'm getting a NoClassDefFoundError and/or a RuntimeExcption (related to an invalid side) on a dedicated server:
+See answer to question 1.
