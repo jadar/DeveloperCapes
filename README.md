@@ -14,8 +14,8 @@ Developer Capes reads a text file off a web server, public Dropbox folder, or a 
 [Getting Started](#gettingStarted)  
 [Guide: Set up with Source Code](#guideSourceCode)  
 [Usage](#usage)  
-[Building](#building)
-[FAQ](#faq)
+[Building](#building)  
+[FAQ](#faq)  
 
 <a name="links"/>
 ###Links:
