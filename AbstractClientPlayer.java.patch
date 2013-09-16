@@ -1,14 +1,14 @@
-﻿--- ../src_base/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java
+--- ../src_base/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java
 +++ ../src_work/minecraft/net/minecraft/client/entity/AbstractClientPlayer.java
 @@ -18,9 +18,9 @@
  {
-     public static final ResourceLocation field_110314_b = new ResourceLocation("textures/entity/steve.png");
-     private ThreadDownloadImageData field_110316_a;
--    private ThreadDownloadImageData field_110315_c;
-+    public ThreadDownloadImageData field_110315_c;
-     private ResourceLocation field_110312_d;
--    private ResourceLocation field_110313_e;
-+    public ResourceLocation field_110313_e;
+     public static final ResourceLocation locationStevePng = new ResourceLocation("textures/entity/steve.png");
+     private ThreadDownloadImageData downloadImageSkin;
+-    private ThreadDownloadImageData downloadImageCape;
++    public ThreadDownloadImageData downloadImageCape;
+     private ResourceLocation locationSkin;
+-    private ResourceLocation locationCape;
++    public ResourceLocation locationCape;
  
      public AbstractClientPlayer(World par1World, String par2Str)
      {
