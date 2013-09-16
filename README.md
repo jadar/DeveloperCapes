@@ -76,7 +76,7 @@ Thats it! If you have any trouble, make a post in the Minecraft Forums post or m
 ###FAQ:
 ####1. I'm getting a NullPointerException when starting a dedicated server:
 You're probably trying to register a file url in a way that is not recommended. Use DevCapesUtil.addFileUrl() instead!
-If that's not what you're doing then make an issue on GitHub.
+If that's what you're doing and it's still crashing, then make an issue on GitHub.
 
 ####2. I'm getting a NoClassDefFoundError and/or a RuntimeExcption (related to an invalid side) on a dedicated server:
 See answer to question 1.
