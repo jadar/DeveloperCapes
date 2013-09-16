@@ -68,8 +68,10 @@ public class DevCapes {
     }
 
     /**
-     * Set up capes. All cape URLs are in the txt file passed in.
-     * https://github.com/jadar/DeveloperCapesAPI/blob/master/SampleCape.txt
+     * <b>DO NOT CALL THIS UNLESS YOU KNOW IT IS BEING CALLED FROM A CLIENT ONLY CLASS/METHOD!</b><br>
+     * <b>USE <i>"DevCapesUtil.addFileUrl(String);"</i> INSTEAD!</b><p>
+     * Set up capes. All cape URLs are in the txt file passed in.<br>
+     * <a href="https://github.com/jadar/DeveloperCapesAPI/blob/master/SampleCape.txt">Sample Cape Config</a>
      * 
      * @param parTxtUrl
      *            The URL of the .txt file containing the groups, members of

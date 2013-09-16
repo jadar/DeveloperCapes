@@ -23,11 +23,12 @@ public class DevCapesUtil {
 	}
 
 	/**
-	 * Wrapper for setting up capes. 
-	 * *Will not run if on a server.*
+	 * Wrapper for setting up capes.<br>
+	 * This is recommended over <i>DevCapes.addFileUrl(String);</i><br>
+	 * *Will not run if on a server.*<p>
 	 * 
-	 * All cape URLs are in the txt file passed in.
-	 * https://github.com/jadar/DeveloperCapesAPI/blob/master/SampleCape.txt
+	 * Set up capes. All cape URLs are in the txt file passed in.<br>
+     * <a href="https://github.com/jadar/DeveloperCapesAPI/blob/master/SampleCape.txt">Sample Cape Config</a>
 	 * 
 	 * @param parTxtUrl
 	 *            The URL of the .txt file containing the groups, members of
