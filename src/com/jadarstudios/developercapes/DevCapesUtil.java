@@ -68,7 +68,7 @@ public class DevCapesUtil {
 	 *            said groups, and the group's cape URL.
 	 */
 	public void addFileUrl(String parTxtUrl) {
-		if(FMLCommonHandler.instance().getSide() != Side.CLIENT)
+		if(!FMLCommonHandler.instance().getSide().equals(Side.CLIENT))
 			return;
 		
 		try{
