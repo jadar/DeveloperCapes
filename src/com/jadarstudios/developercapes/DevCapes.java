@@ -31,7 +31,7 @@ public class DevCapes
 {
 
     private static DevCapes instance;
-    public static final double version = 2.1;
+    public static final double version = 2.2;
 
     public  DevCapesVersionChecker                   versionChecker;
     private HashMap<String, String>                  users;
