@@ -13,7 +13,7 @@ import argo.jdom.JdomParser;
 
 public class DevCapesVersionChecker implements Runnable {
 
-	private static final String versionFileURL = "http://raw.github.com/Jadar/DeveloperCapesAPI/master/version";
+	private static final String versionFileURL = "https://raw.github.com/jadar/DeveloperCapes/master/version.json";
 
 	private byte result = 0;
 	
