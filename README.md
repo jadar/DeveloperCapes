@@ -1,7 +1,7 @@
 Developer Capes
 =============
 
-####Version: 2.1
+####Version: 2.2
 
 A Minecraft library for adding Developer/Tester only capes!
 Use this to add tester or developer only capes to your mod!
