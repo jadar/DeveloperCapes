@@ -1,7 +1,10 @@
-#SampleCapesFile. Upload this to a dropbox or file server. not like 
-#mediafire, but one you can read in your browser.
-
-developer=http://www.myurl.com/DEV_CAPE.png
-developer=username1
-tester=http://www.myurl.com/TESTER_CAPE.png
-tester=username2
+{
+  "developers": {
+    "capeUrl": "http://www.myurl.com/DEV_CAPE.png",
+    "users": [
+      "username1",
+      "username2"
+    ]
+  },
+  "username3": "http://www.myurl.com/PERSONAL_CAPE.png"
+}
