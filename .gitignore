@@ -1,8 +1,16 @@
-._.DS_Store
-._README.md
-._SampleCape.txt
-com/._.DS_Store
-com/jadarstudios/._.DS_Store
-com/jadarstudios/api/._.DS_Store
-currentBuild/
-tmp/
+# Build and Release Folders
+target/
+build/
+bin/
+
+# Other files and folders
+.settings/
+.gradle/
+eclipse/
+
+.project
+.classpath
+MANIFEST.MF
+build.properties
+Thumbs.db
+.DS_Store
