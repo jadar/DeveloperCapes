@@ -108,5 +108,39 @@ uploadArchives
 			//
 			authentication(userName: System.getenv().username, password: System.getenv().password)
 		}
+		
+		pom.project {
+            name project.archivesBaseName
+            packaging 'jar'
+            description 'DeveloperCapes is a library for Minecraft that allows developers to give capes to select people.'
+            url 'https://github.com/jadar/DeveloperCapes/'
+
+            scm {
+                url 'https://github.com/jadar/DeveloperCapes/'
+                connection 'scm:git:git://github.com/jadar/DeveloperCapes.git'
+                developerConnection 'scm:git:git@github.com:jadar/DeveloperCapes.git'
+            }
+
+            issueManagement {
+                system 'github'
+                url 'https://github.com/jadar/DeveloperCapes/issues'
+            }
+
+            licenses {
+                license {
+                    name 'MIT License'
+                    url 'https://raw.github.com/jadar/DeveloperCapes/master/LICENSE'
+                    distribution 'repo'
+                }
+            }
+
+            developers {
+                developer {
+                    id 'jadar'
+                    name 'Jadar'
+                    roles { role 'developer' }
+                }
+            }
+        }
 	}
 }
