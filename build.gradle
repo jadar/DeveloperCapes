@@ -35,47 +35,67 @@ minecraft {
 	version = "1.7.2-10.12.0.995"
 }
 
-buildNumber = 0
+//buildNumber is deprecated
+def buildnumber = 0
 if(System.getenv().BUILD_NUMBER != null)
 {
-	buildNumber = System.getenv().BUILD_NUMBER
+	buildnumber = System.getenv().BUILD_NUMBER
 }
 
 // version and stuff
-version = "3.3.0." + buildNumber
+version = "3.3.0.${buildnumber}"
 group= "com.jadarstudios.developercapes"
-archivesBaseName = "DeveloperCapes-dev-${minecraft.version}"
+archivesBaseName = "DeveloperCapes"
 
 // jar naming
 jar
 {
-    if(System.getenv().BUILD_NUMBER != null)
-    {
-        classifier = "jenkins-${System.getenv().BUILD_NUMBER}"
-        // for getting the version name in jenkins
-        new File("envInject.properties").write("VERSION=$version")
-    }
-    else
-    {
-        classifier = "gradle"
-    }
+    appendix = "${minecraft.version}"
+}
+
+// add a source jar
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'src'
+	appendix = "${minecraft.version}"
+}
+
+// add a javadoc jar
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from 'build/docs/javadoc'
+	classifier = 'javadoc'  
+	appendix = "${minecraft.version}"
+}
+
+// because the normal output has been made to be obfuscated
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+	appendix = "${minecraft.version}"
 }
 
 // fix mcmod.info and include resources
 processResources
 {
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-        
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
+//    // replace stuff in mcmod.info, nothing else
+//    from(sourceSets.main.resources.srcDirs) {
+//        include 'mcmod.info'
+//                
+//        // replace version and mcversion
+//        expand 'version':project.version, 'mcversion':project.minecraft.version
+//    }
+//        
+//    // copy everything else, thats not the mcmod.info
+//    from(sourceSets.main.resources.srcDirs) {
+//       exclude 'mcmod.info'
+//    }
+}
+
+artifacts
+{
+	archives sourceJar
+    archives deobfJar
+    archives javadocJar
 }
 
 uploadArchives
@@ -84,6 +104,8 @@ uploadArchives
 	{
 		configuration = configurations.deployerJars
 		repository(url: "sftp://repo.jadarstudios.com/maven") {
+			//
+			//
 			authentication(userName: System.getenv().username, password: System.getenv().password)
 		}
 	}
