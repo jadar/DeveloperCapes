@@ -111,6 +111,7 @@ uploadArchives
 		
 		pom.project {
             name project.archivesBaseName
+			artifactId project.archivesBaseName
             packaging 'jar'
             description 'DeveloperCapes is a library for Minecraft that allows developers to give capes to select people.'
             url 'https://github.com/jadar/DeveloperCapes/'
