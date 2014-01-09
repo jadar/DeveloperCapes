@@ -78,7 +78,7 @@ uploadArchives
 	{
 		configuration = configurations.deployerJars
 		repository(url: "sftp://repo.jadarstudios.com/maven") {
-			authentication(userName: "", password: "")
+			authentication(userName: System.getenv().username, password: System.getenv().password)
 		}
 	}
 }
