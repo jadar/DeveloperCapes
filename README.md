@@ -50,7 +50,7 @@ The JSON for the config looks like this:
 ```json
 {
     "Group1": {
-        capeUrl: "http://www.example.com/group1_cape.png",
+        "capeUrl": "http://www.example.com/group1_cape.png",
         "users": [
             "JadarMC",
             "MinerID642"
