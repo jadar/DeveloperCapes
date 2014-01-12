@@ -56,7 +56,7 @@ jar
 // add a source jar
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
-    classifier = 'src'
+    classifier = 'sources'
 	appendix = "${minecraft.version}"
 }
 
