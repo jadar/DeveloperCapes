@@ -36,9 +36,9 @@ To start using Developer Capes, [setup your development enviroment](#guideSetUp)
 <a name="usage"/>
 ###Usage:
 
-Once Developer Capes is in your classpath somehow, you are going to want to add this to your mod when it initialized.  
+Once Developer Capes is in your classpath somehow, you are going to want to add this to your mod when it initialized. It registers a cape config with DeveloperCapes. 
 
-*Note: The note that was previously that said DevCapes didn't have to go in a client proxy has been redacted. You need to put it in the client proxy again*
+*Note: The note that was previously here, that said DevCapes didn't have to go in a client proxy, has been redacted. You need to put config registration in the client proxy again*
 
 ```java
 DevCapes.getInstance().registerConfig($CAPES_JSON, $IDENTIFIER);
