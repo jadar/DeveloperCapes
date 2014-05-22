@@ -6,34 +6,28 @@
  */
 package com.jadarstudios.developercapes;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ThreadDownloadImageData;
-import net.minecraft.client.renderer.texture.ITextureObject;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
 import com.google.gson.stream.MalformedJsonException;
 import com.jadarstudios.developercapes.user.DefaultUser;
 import com.jadarstudios.developercapes.user.GroupUser;
 import com.jadarstudios.developercapes.user.IUser;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ThreadDownloadImageData;
+import net.minecraft.client.renderer.texture.ITextureObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * This library adds capes for people you specify
@@ -278,7 +272,11 @@ public class DevCapes
     {
         try
         {
-            this.registerConfig(jsonUrl.openStream(), identifier);
+            URLConnection connection = jsonUrl.openConnection();
+            connection.setRequestProperty("User-Agent", System.getProperty("java.version"));
+            connection.connect();
+
+            this.registerConfig(connection.getInputStream(), identifier);
         }
         catch (IOException e)
         {
