@@ -1,10 +1,10 @@
 {
-  "developers": {
+  "ExampleGroup1": {
     "capeUrl": "http://www.myurl.com/DEV_CAPE.png",
     "users": [
-      "username1",
-      "username2"
+      "ExampleUser1",
+      "ExampleUser2"
     ]
   },
-  "username3": "http://www.myurl.com/PERSONAL_CAPE.png"
+  "ExampleUser3": "http://www.myurl.com/PERSONAL_CAPE.png"
 }
