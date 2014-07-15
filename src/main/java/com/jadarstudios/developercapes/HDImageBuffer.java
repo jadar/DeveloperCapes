@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
- * This class is used by DevCapes as an implementation of {@link IImageBuffer}
+ * This class is used by DevCapesOld as an implementation of {@link IImageBuffer}
  * that allows capes to be HD
  * 
  * @author Jadar
@@ -38,4 +38,11 @@ public class HDImageBuffer implements IImageBuffer
         
         return capeImage;
     }
+
+    @Override
+    public void func_152634_a()
+    {
+    }
+
+
 }

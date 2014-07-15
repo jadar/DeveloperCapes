@@ -8,10 +8,9 @@ package com.jadarstudios.developercapes.user;
 
 import net.minecraft.client.renderer.texture.ITextureObject;
 
-import com.jadarstudios.developercapes.DevCapes;
-
+@Deprecated
 /**
- * This class is used by DevCapes as an implementation of {@link DefaultUser}
+ * This class is used by DevCapesOld as an implementation of {@link DefaultUser}
  * that allows the user to have a group
  * 
  * @author Jadar
@@ -36,6 +35,6 @@ public class GroupUser extends DefaultUser
     @Override
     public ITextureObject getTexture()
     {
-        return DevCapes.getInstance().getGroupTexture(this.group);
+        return null;//DevCapesOld.getInstance().getGroupTexture(this.group);
     }
 }

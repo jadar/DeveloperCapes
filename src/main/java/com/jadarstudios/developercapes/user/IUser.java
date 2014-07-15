@@ -6,9 +6,11 @@
  */
 package com.jadarstudios.developercapes.user;
 
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.util.ResourceLocation;
 
+@Deprecated
 /**
  * This is the interface that you must implement to create your own user type
  * 
@@ -25,4 +27,6 @@ public interface IUser
      * @return The {@link ITextureObject} that contains the cape
      */
     public ITextureObject getTexture();
+    public boolean isTextureLoadedForPlayer(AbstractClientPlayer player);
+    public void loadTexture(AbstractClientPlayer player);
 }
