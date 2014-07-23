@@ -3,7 +3,7 @@ Developer Capes
 
 #####Notice: Usage changed in version 3. Please refer below to see how to set up DevCapes now.
 
-####Version: 3.3.1.11
+####Version: 3.4.1.x
 
 A Minecraft library for adding Developer/Tester only capes!
 Use this to add tester or developer only capes to your mod!
