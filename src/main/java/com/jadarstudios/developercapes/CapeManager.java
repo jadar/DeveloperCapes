@@ -1,7 +1,9 @@
 package com.jadarstudios.developercapes;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,8 +19,16 @@ public enum CapeManager {
         this.capes = new HashMap<String, ICape>();
     }
 
-    public void addCape(String capeName, ICape cape) {
-        capes.put(capeName, cape);
+    public void addCape(ICape cape) {
+        if (!capes.containsValue(cape)) {
+            capes.put(cape.getName(), cape);
+        }
+    }
+
+    public void addCapes(Collection<ICape> capes) {
+        for (ICape c : capes) {
+            this.addCape(c);
+        }
     }
 
     public ICape getCape(String capeName) {
@@ -26,23 +36,23 @@ public enum CapeManager {
     }
 
     public ICape newInstance(String name) {
-        StaticCape cape = new StaticCape();
+        StaticCape cape = new StaticCape(name);
         this.capes.put(name, cape);
         return cape;
     }
 
     public ICape parse(String name, Object object) {
-        if (object instanceof URL) {
-            ICape cape = this.newInstance(name);
-            ((StaticCape)cape).setURL((URL)object);
-            ((StaticCape)cape).setName(name);
+        ICape cape = null;
+        try {
+            if (object instanceof String) {
+                cape = new StaticCape(name, new URL((String)object));
+
+                return cape;
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } finally {
             return cape;
         }
-
-        return null;
     }
-
-
-
-
 }

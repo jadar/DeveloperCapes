@@ -5,7 +5,9 @@ import com.google.common.primitives.UnsignedBytes;
 import com.google.common.primitives.UnsignedInts;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.jadarstudios.developercapes.user.Group;
 import com.jadarstudios.developercapes.user.GroupManager;
+import com.jadarstudios.developercapes.user.User;
 import com.jadarstudios.developercapes.user.UserManager;
 
 import java.io.BufferedReader;
@@ -35,12 +37,22 @@ public enum CapeConfigManager {
 
     public void addConfig(int id, CapeConfig config) {
         int realId = claimId(id);
-//        CapeConfig config = this.parse(json);
-        this.configs.put(new Integer(id), config);
+        this.configs.put(id, config);
+        try {
+            for (User u : config.users.values()) {
+                UserManager.INSTANCE.addUser(u);
+            }
+
+            for (Group g : config.groups.values()) {
+                GroupManager.INSTANCE.addGroup(g);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public CapeConfig getConfig(int id) {
-        return this.configs.get(new Integer(id));
+        return this.configs.get(id);
     }
 
     public int getIdForConfig(CapeConfig config) {
@@ -55,12 +67,12 @@ public enum CapeConfigManager {
         try {
             UnsignedBytes.checkedCast(id);
         } catch(IllegalArgumentException e) {
-
+            e.printStackTrace();
         }
 
         boolean isRegistered = availableIds.get(id);
         if (isRegistered) {
-
+            DevCapes.logger.error(String.format("The config ID %d was attempted to be claimed but is already claimed.", id));
         }
 
         availableIds.set(id);
@@ -85,17 +97,16 @@ public enum CapeConfigManager {
                 if (obj instanceof Map) {
                     Map group = (Map)obj;
 
-                    instance.groups.put(nodeName, group);
-                    GroupManager.INSTANCE.parse(nodeName, group);
+                    Group g = GroupManager.INSTANCE.parse(nodeName, group);
+                    instance.groups.put(g.name, g);
+//                    GroupManager.INSTANCE.parse(nodeName, group);
                 } else if (obj instanceof String) {
-                    instance.users.put(nodeName, (String) obj);
-                    UserManager.INSTANCE.parse(nodeName, obj);
+                    User u = UserManager.INSTANCE.parse(nodeName, obj);
+                    instance.users.put(nodeName, u);
                 }
             }
 
         } catch(JsonSyntaxException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
@@ -103,6 +114,10 @@ public enum CapeConfigManager {
     }
 
     public CapeConfig parseFromStream(InputStream is) {
+        if (is == null) {
+            DevCapes.logger.error("Can't parse a null input stream!");
+            return null;
+        }
         CapeConfig instance = null;
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));

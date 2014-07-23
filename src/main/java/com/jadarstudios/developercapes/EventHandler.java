@@ -1,6 +1,5 @@
 package com.jadarstudios.developercapes;
 
-import com.jadarstudios.developercapes.user.IUser;
 import com.jadarstudios.developercapes.user.User;
 import com.jadarstudios.developercapes.user.UserManager;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

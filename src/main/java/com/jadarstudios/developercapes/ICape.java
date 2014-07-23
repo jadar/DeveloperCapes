@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 public interface ICape
 {
 
+    public String getName();
     public ITextureObject getTexture();
     public ResourceLocation getLocation();
     public void loadTexture(AbstractClientPlayer player);

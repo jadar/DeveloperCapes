@@ -3,9 +3,7 @@ package com.jadarstudios.developercapes.user;
 import com.jadarstudios.developercapes.CapeManager;
 import com.jadarstudios.developercapes.ICape;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author jadar
@@ -19,13 +17,22 @@ public enum GroupManager {
         this.groups = new HashMap<String, Group>();
     }
 
-    public void addGroup(String capeName, Group group) {
-        groups.put(capeName, group);
+    public void addGroup(Group group) {
+        groups.put(group.name, group);
+
+        try {
+            UserManager.INSTANCE.addUsers(new HashSet<User>(group.users.values()));
+            CapeManager.INSTANCE.addCape(group.cape);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Group getGroup(String capeName) {
         return groups.get(capeName);
     }
+
+
 
     public Group newInstance(String name) {
         if (this.getGroup(name) != null) {
@@ -45,7 +52,7 @@ public enum GroupManager {
             // fail
         }
 
-        group.cape = CapeManager.INSTANCE.newInstance(capeUrl);
+        group.cape = CapeManager.INSTANCE.parse(name, capeUrl);
 
         for (String username : users) {
             User user = UserManager.INSTANCE.newInstance(username);

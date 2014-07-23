@@ -23,7 +23,7 @@ public class DevCapesTestMod
         try {
             InputStream is = DevCapes.getInstance().getStreamForURL(new URL("https://dl.dropboxusercontent.com/u/22865035/ModHosting/capes/capes.json"));
             CapeConfig config = CapeConfigManager.INSTANCE.parseFromStream(is);
-//            CapeConfigManager.INSTANCE.addConfig(CapeConfigManager.getUniqueId(), config);
+            CapeConfigManager.INSTANCE.addConfig(CapeConfigManager.getUniqueId(), config);
         } catch(MalformedURLException e) {
             e.printStackTrace();
         }

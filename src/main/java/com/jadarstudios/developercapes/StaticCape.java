@@ -18,7 +18,9 @@ public class StaticCape extends AbstractCape {
         this.setURL(url);
     }
 
-    public StaticCape() {}
+    public StaticCape(String name) {
+        this(name, null);
+    }
 
     @Override
     public void loadTexture(AbstractClientPlayer player) {
@@ -39,10 +41,15 @@ public class StaticCape extends AbstractCape {
     }
 
     public void setURL(URL url) {
+        if (url == null) {
+            this.texture = null;
+            return;
+        }
         this.texture = new ThreadDownloadImageData(null, url.toString(), null, new HDImageBuffer());
     }
 
     public void setName(String name) {
+        this.name = name;
         this.location = new ResourceLocation("DevCapes/"+name);
     }
 

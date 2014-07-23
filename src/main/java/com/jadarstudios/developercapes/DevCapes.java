@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -36,6 +37,9 @@ public class DevCapes {
         return instance;
     }
 
+    /**
+     * Gets and returns an InputStream for a URL.
+     */
     public InputStream getStreamForURL(URL url) {
         InputStream is = null;
         try {
@@ -52,6 +56,9 @@ public class DevCapes {
         }
     }
 
+    /**
+     * Gets and returns an InputStream for a file.
+     */
     public InputStream getStreamForFile(File file) {
         InputStream is = null;
         try {
@@ -61,5 +68,69 @@ public class DevCapes {
         } finally {
             return is;
         }
+    }
+
+    @Deprecated
+    /**
+     * Registers a config with DevCapes. DEPRECATED: Please use registerConfig(String jsonUrl) instead
+     *
+     * @param jsonUrl
+     *            The URL as a String that links to the Json file that you want
+     *            to add
+     * @param identifier
+     *            A unique Identifier, normally your mod id
+     *                 * @return the id of the registered config
+     */
+    public int registerConfig(String jsonURL, String identifier) {
+        return this.registerConfig(jsonURL);
+    }
+
+    /**
+     * Registers a config with DevCapes. DEPRECATED: Please use registerConfig(String jsonUrl) instead
+     *
+     * @param jsonUrl
+     *            The URL as a String that links to the Json file that you want
+     *            to add
+     * @return the id of the registered config
+     */
+    public int registerConfig(String jsonUrl) {
+        int id = -1;
+        try {
+            URL url = new URL(jsonUrl);
+            id = this.registerConfig(url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } finally {
+            return id;
+        }
+    }
+
+    @Deprecated
+    /**
+     * Registers a config with DevCapes. DEPRECATED: Please use registerConfig(URL url) instead
+     *
+     * @param jsonUrl
+     *            A {@link URL} that links to the Json file that you want to add
+     * @param identifier
+     *            A unique Identifier, normally your mod id
+     * @return the id of the registered config
+     */
+    public int registerConfig(URL url, String identifier) {
+        return this.registerConfig(url);
+    }
+
+    /**
+     * Registers a config with DevCapes and returns the ID of the config.
+     *
+     * @param jsonUrl
+     *            A {@link URL} that links to the Json file that you want to add
+     * @return the id of the registered config
+     */
+    public int registerConfig(URL jsonUrl) {
+        InputStream is = this.getStreamForURL(jsonUrl);
+        CapeConfig config = CapeConfigManager.INSTANCE.parseFromStream(is);
+        int id = CapeConfigManager.getUniqueId();
+        CapeConfigManager.INSTANCE.addConfig(id, config);
+        return id;
     }
 }
