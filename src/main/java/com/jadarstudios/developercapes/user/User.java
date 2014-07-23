@@ -1,6 +1,6 @@
 package com.jadarstudios.developercapes.user;
 
-import com.jadarstudios.developercapes.ICape;
+import com.jadarstudios.developercapes.cape.ICape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,6 @@ public class User {
         this.username = username;
         this.capes = new ArrayList<ICape>();
     }
-
 
 
 }

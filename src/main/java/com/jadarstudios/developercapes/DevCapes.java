@@ -1,12 +1,14 @@
 /**
-* DeveloperCapes by Jadar
-* License: MIT License
-* (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
-* version 4.0.0.x
-*/
+ * DeveloperCapes by Jadar
+ * License: MIT License
+ * (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
+ * version 4.0.0.x
+ */
 
 package com.jadarstudios.developercapes;
 
+import com.jadarstudios.developercapes.cape.CapeConfig;
+import com.jadarstudios.developercapes.cape.CapeConfigManager;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,7 +29,7 @@ public class DevCapes {
     public static final Logger logger = LogManager.getLogger("DevCapes");
 
     protected DevCapes() {
-        MinecraftForge.EVENT_BUS.register(new EventHandler());
+        MinecraftForge.EVENT_BUS.register(new RenderEventHandler());
     }
 
     public static DevCapes getInstance() {
@@ -48,8 +50,7 @@ public class DevCapes {
             connection.connect();
 
             is = connection.getInputStream();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             return is;
@@ -62,7 +63,7 @@ public class DevCapes {
     public InputStream getStreamForFile(File file) {
         InputStream is = null;
         try {
-            is =  new FileInputStream(file);
+            is = new FileInputStream(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
@@ -88,9 +89,8 @@ public class DevCapes {
     /**
      * Registers a config with DevCapes. DEPRECATED: Please use registerConfig(String jsonUrl) instead
      *
-     * @param jsonUrl
-     *            The URL as a String that links to the Json file that you want
-     *            to add
+     * @param jsonUrl The URL as a String that links to the Json file that you want
+     *                to add
      * @return the id of the registered config
      */
     public int registerConfig(String jsonUrl) {
@@ -122,8 +122,7 @@ public class DevCapes {
     /**
      * Registers a config with DevCapes and returns the ID of the config.
      *
-     * @param jsonUrl
-     *            A {@link URL} that links to the Json file that you want to add
+     * @param jsonUrl A {@link URL} that links to the Json file that you want to add
      * @return the id of the registered config
      */
     public int registerConfig(URL jsonUrl) {

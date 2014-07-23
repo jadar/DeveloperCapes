@@ -1,21 +1,14 @@
 package com.jadarstudios.developercapes.user;
 
-import com.jadarstudios.developercapes.CapeManager;
-import com.jadarstudios.developercapes.ICape;
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.renderer.texture.ITextureObject;
-import net.minecraft.util.ResourceLocation;
+import com.jadarstudios.developercapes.cape.ICape;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
  * @author jadar
  */
-public class Group
-{
+public class Group {
 
     protected HashMap<String, User> users;
     protected ICape cape;

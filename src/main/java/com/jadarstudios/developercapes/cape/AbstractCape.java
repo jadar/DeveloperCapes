@@ -1,16 +1,12 @@
-package com.jadarstudios.developercapes;
+package com.jadarstudios.developercapes.cape;
 
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.util.ResourceLocation;
-
-import java.awt.image.BufferedImage;
 
 /**
  * @author jadar
  */
-public abstract class AbstractCape implements ICape
-{
+public abstract class AbstractCape implements ICape {
     protected String name;
     protected ITextureObject texture;
     protected ResourceLocation location;
@@ -19,7 +15,8 @@ public abstract class AbstractCape implements ICape
         this.name = name;
     }
 
-    public AbstractCape() {}
+    public AbstractCape() {
+    }
 
     @Override
     public String getName() {
@@ -27,14 +24,12 @@ public abstract class AbstractCape implements ICape
     }
 
     @Override
-    public ITextureObject getTexture()
-    {
+    public ITextureObject getTexture() {
         return this.texture;
     }
 
     @Override
-    public ResourceLocation getLocation()
-    {
+    public ResourceLocation getLocation() {
         return this.location;
     }
 

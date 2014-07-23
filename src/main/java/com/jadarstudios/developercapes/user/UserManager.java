@@ -1,11 +1,9 @@
 package com.jadarstudios.developercapes.user;
 
-import com.jadarstudios.developercapes.CapeManager;
 import com.jadarstudios.developercapes.DevCapes;
-import com.jadarstudios.developercapes.ICape;
+import com.jadarstudios.developercapes.cape.CapeManager;
+import com.jadarstudios.developercapes.cape.ICape;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -54,13 +52,21 @@ public enum UserManager {
     }
 
     public User parse(Object user, Object cape) {
-        if (user instanceof String) {
-
-            User userInstance = new User((String)user);
-            ICape capeInstance = CapeManager.INSTANCE.parse((String)user, (String)cape);
-            userInstance.capes.add(capeInstance);
+        User userInstance = null;
+        if (!(user instanceof String)) {
+            DevCapes.logger.error(String.format("User %s could not be parsed because it was not a String!", user.toString()));
             return userInstance;
         }
-        return null;
+
+        userInstance = new User((String) user);
+        ICape capeInstance = CapeManager.INSTANCE.parse((String) user, cape);
+
+        if (capeInstance != null) {
+            userInstance.capes.add(capeInstance);
+        } else {
+            DevCapes.logger.error(String.format("Error parsing cape, %s", cape.toString()));
+        }
+
+        return userInstance;
     }
 }

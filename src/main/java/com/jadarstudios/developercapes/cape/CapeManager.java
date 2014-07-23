@@ -1,11 +1,11 @@
-package com.jadarstudios.developercapes;
+package com.jadarstudios.developercapes.cape;
+
+import com.jadarstudios.developercapes.DevCapes;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * @author jadar
@@ -43,13 +43,15 @@ public enum CapeManager {
 
     public ICape parse(String name, Object object) {
         ICape cape = null;
-        try {
-            if (object instanceof String) {
-                cape = new StaticCape(name, new URL((String)object));
+        if (!(object instanceof String)) {
+            DevCapes.logger.error(String.format("Cape, %s, could not be parsed because it is not a String!", object));
+            return cape;
+        }
 
-                return cape;
-            }
+        try {
+            cape = new StaticCape(name, new URL((String) object));
         } catch (MalformedURLException e) {
+            DevCapes.logger.error(String.format("Are you crazy?? %s is not a valid URL!", (String) object));
             e.printStackTrace();
         } finally {
             return cape;

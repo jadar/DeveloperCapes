@@ -1,10 +1,10 @@
-package com.jadarstudios.developercapes;
+package com.jadarstudios.developercapes.cape;
 
 import com.google.common.collect.HashBiMap;
 import com.google.common.primitives.UnsignedBytes;
-import com.google.common.primitives.UnsignedInts;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.jadarstudios.developercapes.DevCapes;
 import com.jadarstudios.developercapes.user.Group;
 import com.jadarstudios.developercapes.user.GroupManager;
 import com.jadarstudios.developercapes.user.User;
@@ -14,7 +14,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.util.BitSet;
 import java.util.Map;
 
@@ -66,7 +65,7 @@ public enum CapeConfigManager {
     public static int claimId(int id) {
         try {
             UnsignedBytes.checkedCast(id);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
 
@@ -95,18 +94,21 @@ public enum CapeConfigManager {
                 final String nodeName = entry.getKey();
                 final Object obj = entry.getValue();
                 if (obj instanceof Map) {
-                    Map group = (Map)obj;
+                    Map group = (Map) obj;
 
                     Group g = GroupManager.INSTANCE.parse(nodeName, group);
-                    instance.groups.put(g.name, g);
-//                    GroupManager.INSTANCE.parse(nodeName, group);
+                    if (g != null) {
+                        instance.groups.put(g.name, g);
+                    }
                 } else if (obj instanceof String) {
                     User u = UserManager.INSTANCE.parse(nodeName, obj);
-                    instance.users.put(nodeName, u);
+                    if (u != null) {
+                        instance.users.put(nodeName, u);
+                    }
                 }
             }
 
-        } catch(JsonSyntaxException e) {
+        } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }
 

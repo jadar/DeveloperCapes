@@ -1,9 +1,12 @@
 package com.jadarstudios.developercapes.user;
 
-import com.jadarstudios.developercapes.CapeManager;
-import com.jadarstudios.developercapes.ICape;
+import com.jadarstudios.developercapes.DevCapes;
+import com.jadarstudios.developercapes.cape.CapeManager;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 /**
  * @author jadar
@@ -33,7 +36,6 @@ public enum GroupManager {
     }
 
 
-
     public Group newInstance(String name) {
         if (this.getGroup(name) != null) {
             return this.getGroup(name);
@@ -43,23 +45,27 @@ public enum GroupManager {
     }
 
     public Group parse(String name, Map<String, Object> data) {
-        Group group = this.newInstance(name);
+        Group group = new Group(name);
 
-        ArrayList<String> users = (ArrayList)data.get("users");
-        String capeUrl = (String)data.get("capeUrl");
+        Object usersObj = data.get("users");
+        Object capeUrlObj = data.get("capeUrl");
 
-        if (users == null || capeUrl == null) {
-            // fail
+        if (!(usersObj instanceof ArrayList) || !(capeUrlObj instanceof String)) {
+            DevCapes.logger.error(String.format("Group %s could not be parsed because it either is invalid or missing elements.", name));
+            return null;
         }
+
+        ArrayList users = (ArrayList)usersObj;
+        String capeUrl = (String)capeUrlObj;
 
         group.cape = CapeManager.INSTANCE.parse(name, capeUrl);
 
-        for (String username : users) {
-            User user = UserManager.INSTANCE.newInstance(username);
+        for (Object obj : users) {
+            User user = UserManager.INSTANCE.parse(obj, group.cape);
             if (user != null) {
                 group.addUser(user);
             } else {
-
+                continue;
             }
         }
 

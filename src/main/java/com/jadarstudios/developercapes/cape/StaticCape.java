@@ -1,5 +1,6 @@
-package com.jadarstudios.developercapes;
+package com.jadarstudios.developercapes.cape;
 
+import com.jadarstudios.developercapes.HDImageBuffer;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -50,7 +51,7 @@ public class StaticCape extends AbstractCape {
 
     public void setName(String name) {
         this.name = name;
-        this.location = new ResourceLocation("DevCapes/"+name);
+        this.location = new ResourceLocation("DevCapes/" + name);
     }
 
 }
