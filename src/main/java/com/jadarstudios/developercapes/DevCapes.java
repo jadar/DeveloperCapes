@@ -59,6 +59,8 @@ public class DevCapes {
 
     /**
      * Gets and returns an InputStream for a file.
+     *
+     * InputStream.close() needs to be called on this after you're done!
      */
     public InputStream getStreamForFile(File file) {
         InputStream is = null;
