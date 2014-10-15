@@ -59,7 +59,7 @@ public enum UserManager {
         }
 
         userInstance = new User((String) user);
-        ICape capeInstance = CapeManager.INSTANCE.parse((String) user, cape);
+        ICape capeInstance = (cape instanceof ICape) ? (ICape)cape : CapeManager.INSTANCE.parse((String) user, cape);
 
         if (capeInstance != null) {
             userInstance.capes.add(capeInstance);
