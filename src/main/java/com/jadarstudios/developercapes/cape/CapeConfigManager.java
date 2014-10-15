@@ -122,11 +122,7 @@ public enum CapeConfigManager {
         }
         CapeConfig instance = null;
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            String json = "";
-            while (reader.ready()) {
-                json += reader.readLine();
-            }
+            String json = new String(ByteStreams.toByteArray(is));
             instance = CapeConfigManager.INSTANCE.parse(json);
         } catch (IOException e) {
             e.printStackTrace();
