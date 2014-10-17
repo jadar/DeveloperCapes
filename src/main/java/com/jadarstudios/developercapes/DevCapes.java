@@ -52,9 +52,8 @@ public class DevCapes {
             is = connection.getInputStream();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            return is;
         }
+        return is;
     }
 
     /**
@@ -68,14 +67,14 @@ public class DevCapes {
             is = new FileInputStream(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } finally {
-            return is;
         }
+        return is;
     }
 
     @Deprecated
     /**
-     * Registers a config with DevCapes. DEPRECATED: Please use registerConfig(String jsonUrl) instead
+     * DEPRECATED: Please use {@link #registerConfig(String jsonUrl)} instead.<p>
+     * Registers a config with DevCapes.
      *
      * @param jsonUrl
      *            The URL as a String that links to the Json file that you want
@@ -89,7 +88,7 @@ public class DevCapes {
     }
 
     /**
-     * Registers a config with DevCapes. DEPRECATED: Please use registerConfig(String jsonUrl) instead
+     * Registers a config with DevCapes.
      *
      * @param jsonUrl The URL as a String that links to the Json file that you want
      *                to add
@@ -102,14 +101,14 @@ public class DevCapes {
             id = this.registerConfig(url);
         } catch (MalformedURLException e) {
             e.printStackTrace();
-        } finally {
-            return id;
         }
+        return id;
     }
 
     @Deprecated
     /**
-     * Registers a config with DevCapes. DEPRECATED: Please use registerConfig(URL url) instead
+     * DEPRECATED: Please use {@link #registerConfig(URL url)} instead.<p>
+     * Registers a config with DevCapes.
      *
      * @param jsonUrl
      *            A {@link URL} that links to the Json file that you want to add
