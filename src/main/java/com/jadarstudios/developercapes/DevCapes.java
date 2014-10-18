@@ -40,7 +40,9 @@ public class DevCapes {
     }
 
     /**
-     * Gets and returns an InputStream for a URL.
+     * InputStream.close() needs to be called on this after you're done!
+     * 
+     * @return {@link InputStream} for the {@link URL}
      */
     public InputStream getStreamForURL(URL url) {
         InputStream is = null;
@@ -57,9 +59,9 @@ public class DevCapes {
     }
 
     /**
-     * Gets and returns an InputStream for a file.
-     *
      * InputStream.close() needs to be called on this after you're done!
+     * 
+     * @return {@link InputStream} for the {@link File}
      */
     public InputStream getStreamForFile(File file) {
         InputStream is = null;
@@ -81,7 +83,7 @@ public class DevCapes {
      *            to add
      * @param identifier
      *            A unique Identifier, normally your mod id
-     *                 * @return the id of the registered config
+     * @return The id of the registered config
      */
     public int registerConfig(String jsonURL, String identifier) {
         return this.registerConfig(jsonURL);
@@ -92,7 +94,7 @@ public class DevCapes {
      *
      * @param jsonUrl The URL as a String that links to the Json file that you want
      *                to add
-     * @return the id of the registered config
+     * @return The id of the registered config
      */
     public int registerConfig(String jsonUrl) {
         int id = -1;
@@ -114,7 +116,7 @@ public class DevCapes {
      *            A {@link URL} that links to the Json file that you want to add
      * @param identifier
      *            A unique Identifier, normally your mod id
-     * @return the id of the registered config
+     * @return The id of the registered config
      */
     public int registerConfig(URL url, String identifier) {
         return this.registerConfig(url);
@@ -124,7 +126,7 @@ public class DevCapes {
      * Registers a config with DevCapes and returns the ID of the config.
      *
      * @param jsonUrl A {@link URL} that links to the Json file that you want to add
-     * @return the id of the registered config
+     * @return The id of the registered config
      */
     public int registerConfig(URL jsonUrl) {
         InputStream is = this.getStreamForURL(jsonUrl);

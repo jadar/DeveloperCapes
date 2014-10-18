@@ -8,6 +8,8 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 
 /**
+ * This is not the class you are looking for.
+ * 
  * @author jadar
  */
 public class RenderEventHandler {
@@ -28,5 +30,4 @@ public class RenderEventHandler {
             cape.loadTexture(player);
         }
     }
-
 }

@@ -51,10 +51,9 @@ public enum CapeManager {
         try {
             cape = new StaticCape(name, new URL((String) object));
         } catch (MalformedURLException e) {
-            DevCapes.logger.error(String.format("Are you crazy?? %s is not a valid URL!", (String) object));
+            DevCapes.logger.error(String.format("Are you crazy?? \"%s\" is not a valid URL!", (String) object));
             e.printStackTrace();
-        } finally {
-            return cape;
         }
+        return cape;
     }
 }

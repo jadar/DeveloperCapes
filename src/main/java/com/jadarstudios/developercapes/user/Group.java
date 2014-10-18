@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
+ * This represents a group of players that share a cape
+ * 
  * @author jadar
  */
 public class Group {

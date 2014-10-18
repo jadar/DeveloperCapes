@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This player is getting their own cape
+ * 
  * @author jadar
  */
 public class User {
@@ -17,6 +19,4 @@ public class User {
         this.username = username;
         this.capes = new ArrayList<ICape>();
     }
-
-
 }

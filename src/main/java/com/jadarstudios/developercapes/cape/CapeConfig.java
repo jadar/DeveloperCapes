@@ -6,6 +6,8 @@ import com.jadarstudios.developercapes.user.User;
 import java.util.HashMap;
 
 /**
+ * The players that need to be outfitted are stored here
+ * 
  * @author jadar
  */
 public class CapeConfig {

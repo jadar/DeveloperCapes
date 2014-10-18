@@ -4,6 +4,8 @@ import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.util.ResourceLocation;
 
 /**
+ * Abstract Implementation of ICape used within Dev. Capes
+ * 
  * @author jadar
  */
 public abstract class AbstractCape implements ICape {
@@ -15,8 +17,7 @@ public abstract class AbstractCape implements ICape {
         this.name = name;
     }
 
-    public AbstractCape() {
-    }
+    public AbstractCape() {}
 
     @Override
     public String getName() {
@@ -32,5 +33,4 @@ public abstract class AbstractCape implements ICape {
     public ResourceLocation getLocation() {
         return this.location;
     }
-
 }

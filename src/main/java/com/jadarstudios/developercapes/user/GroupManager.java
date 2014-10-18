@@ -36,7 +36,7 @@ public enum GroupManager {
     }
 
 
-    public Group newInstance(String name) {
+    public Group groupFromName(String name) {
         if (this.getGroup(name) != null) {
             return this.getGroup(name);
         }
@@ -61,7 +61,7 @@ public enum GroupManager {
         group.cape = CapeManager.INSTANCE.parse(name, capeUrl);
 
         for (Object obj : users) {
-            User user = UserManager.INSTANCE.parse(obj, group.cape);
+            User user = UserManager.INSTANCE.parse((String)obj, group.cape);
             if (user != null) {
                 group.addUser(user);
             }

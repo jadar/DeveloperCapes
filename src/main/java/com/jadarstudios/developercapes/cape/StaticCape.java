@@ -33,12 +33,8 @@ public class StaticCape extends AbstractCape {
 
     @Override
     public boolean isTextureLoaded(AbstractClientPlayer player) {
-        ResourceLocation location = player.getLocationCape();
-        if (location == null) {
-            return false;
-        }
-
-        return true;
+        ResourceLocation cape = player.getLocationCape();
+        return cape != null;
     }
 
     public void setURL(URL url) {

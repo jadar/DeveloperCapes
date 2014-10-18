@@ -70,7 +70,7 @@ public enum CapeConfigManager {
 
         boolean isRegistered = availableIds.get(id);
         if (isRegistered) {
-            DevCapes.logger.error(String.format("The config ID %d was attempted to be claimed but is already claimed.", id));
+            DevCapes.logger.error(String.format("The config ID %d is already claimed.", id));
         }
 
         availableIds.set(id);
@@ -100,8 +100,8 @@ public enum CapeConfigManager {
                     }
                 }
             }
-
         } catch (JsonSyntaxException e) {
+        	DevCapes.logger.error("CapeConfig could not be parsed because:");
             e.printStackTrace();
         }
 
@@ -118,11 +118,13 @@ public enum CapeConfigManager {
             String json = new String(ByteStreams.toByteArray(is));
             instance = CapeConfigManager.INSTANCE.parse(json);
         } catch (IOException e) {
+        	DevCapes.logger.error("Failed to read the input stream!");
             e.printStackTrace();
         } finally {
         	try {
         		is.close();
         	} catch (IOException e) {
+        		// Ignoring this
         	}
         }
 
