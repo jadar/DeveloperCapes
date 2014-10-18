@@ -1,6 +1,7 @@
 package com.jadarstudios.developercapes.cape;
 
 import com.google.common.collect.HashBiMap;
+import com.google.common.io.ByteStreams;
 import com.google.common.primitives.UnsignedBytes;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -10,10 +11,8 @@ import com.jadarstudios.developercapes.user.GroupManager;
 import com.jadarstudios.developercapes.user.User;
 import com.jadarstudios.developercapes.user.UserManager;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.BitSet;
 import java.util.Map;
 
@@ -36,7 +35,7 @@ public enum CapeConfigManager {
 
     public void addConfig(int id, CapeConfig config) {
         int realId = claimId(id);
-        this.configs.put(id, config);
+        this.configs.put(realId, config);
         try {
             for (User u : config.users.values()) {
                 UserManager.INSTANCE.addUser(u);
@@ -77,12 +76,6 @@ public enum CapeConfigManager {
         availableIds.set(id);
         return id;
     }
-
-//    public CapeConfig newInstance() {
-//        CapeConfig instance = new CapeConfig();
-//        this.addConfig(this.getUniqueId(), );
-//        return instance;
-//    }
 
     public CapeConfig parse(String config) {
         CapeConfig instance = new CapeConfig();

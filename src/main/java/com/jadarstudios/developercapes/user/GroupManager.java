@@ -64,11 +64,8 @@ public enum GroupManager {
             User user = UserManager.INSTANCE.parse(obj, group.cape);
             if (user != null) {
                 group.addUser(user);
-            } else {
-                continue;
             }
         }
-
         return group;
     }
 }
