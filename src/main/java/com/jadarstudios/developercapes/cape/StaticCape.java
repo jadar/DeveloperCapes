@@ -16,6 +16,8 @@ import net.minecraft.util.ResourceLocation;
 import java.net.URL;
 
 /**
+ * Default Cape implementation
+ * 
  * @author jadar
  */
 public class StaticCape extends AbstractCape {

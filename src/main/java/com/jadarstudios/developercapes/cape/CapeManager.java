@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.HashMap;
 
 /**
+ * This manages all of the capes, be nice to it or you won't get one!
+ * 
  * @author jadar
  */
 public enum CapeManager {

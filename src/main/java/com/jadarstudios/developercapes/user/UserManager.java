@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
+ * Users can not be trusted to put capes on by themselves
+ * 
  * @author jadar
  */
 public enum UserManager {

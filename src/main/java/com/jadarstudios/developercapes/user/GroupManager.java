@@ -15,6 +15,8 @@ import java.util.HashSet;
 import java.util.Map;
 
 /**
+ * All groups have to be managed
+ * 
  * @author jadar
  */
 public enum GroupManager {
