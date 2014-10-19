@@ -39,7 +39,7 @@ public enum UserManager {
         }
     }
 
-    public User userFromName(String username) {
+    public User newUser(String username) {
         User user = null;
         if (this.users.containsKey(username)) {
             user = this.getUser(username);

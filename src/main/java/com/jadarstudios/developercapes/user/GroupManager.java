@@ -36,7 +36,7 @@ public enum GroupManager {
     }
 
 
-    public Group groupFromName(String name) {
+    public Group newGroup(String name) {
         if (this.getGroup(name) != null) {
             return this.getGroup(name);
         }
