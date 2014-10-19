@@ -1,3 +1,9 @@
+/**
+ * DeveloperCapes by Jadar
+ * License: MIT License
+ * (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
+ * version 4.0.0.x
+ */
 package com.jadarstudios.developercapes.user;
 
 import com.jadarstudios.developercapes.DevCapes;
@@ -54,7 +60,7 @@ public enum UserManager {
     public User parse(String user, Object cape) {
         User userInstance = new User(user);
 
-        ICape capeInstance = (cape instanceof ICape) ? (ICape)cape : CapeManager.INSTANCE.parse(user, cape);
+        ICape capeInstance = (cape instanceof ICape) ? (ICape)cape : CapeManager.INSTANCE.parse(user, cape.toString());
 
         if (capeInstance != null) {
             userInstance.capes.add(capeInstance);

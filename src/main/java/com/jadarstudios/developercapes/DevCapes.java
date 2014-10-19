@@ -4,7 +4,6 @@
  * (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
  * version 4.0.0.x
  */
-
 package com.jadarstudios.developercapes;
 
 import com.jadarstudios.developercapes.cape.CapeConfig;
