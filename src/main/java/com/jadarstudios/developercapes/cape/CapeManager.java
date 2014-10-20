@@ -48,20 +48,26 @@ public enum CapeManager {
         this.capes.put(name, cape);
         return cape;
     }
+    
+    public ICape parse(String name, Object object) {
+        ICape cape = null;
+        if(object instanceof String || object instanceof URL){
+        	parse(name, object.toString());
+        }else{
+        	DevCapes.logger.error(String.format("Cape, %s, could not be parsed because it is not in an accepted format!", object));
+        }
+        return cape;
+    }
 
-    public ICape parse(String name, String url) {
+    protected ICape parse(String name, String url) {
         ICape cape = null;
 
         try {
-            cape = parse(name, new URL(url));
+            cape = new StaticCape(name, new URL(url));
         } catch (MalformedURLException e) {
             DevCapes.logger.error(String.format("Are you crazy?? \"%s\" is not a valid URL!", url));
             e.printStackTrace();
         }
         return cape;
-    }
-    
-    public ICape parse(String name, URL url) {
-        return new StaticCape(name, url);
     }
 }
