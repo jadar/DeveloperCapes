@@ -30,6 +30,22 @@ dependencies {
     deployerJars "org.apache.maven.wagon:wagon-ssh:2.2"
 }
 
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+    demo {
+        java {
+            srcDir 'src/demo/java'
+        }
+    }
+}
+
 // minecraft properteis
 minecraft {
 	version = "1.7.10-10.13.0.1160"

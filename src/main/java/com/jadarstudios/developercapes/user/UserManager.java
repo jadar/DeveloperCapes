@@ -18,13 +18,21 @@ import java.util.Set;
  * 
  * @author jadar
  */
-public enum UserManager {
-    INSTANCE;
+public class UserManager {
+
+    protected static UserManager instance;
 
     protected HashMap<String, User> users;
 
-    private UserManager() {
+    public UserManager() {
         this.users = new HashMap<String, User>();
+    }
+
+    public static UserManager getInstance() {
+        if (instance == null) {
+            instance = new UserManager();
+        }
+        return instance;
     }
 
     public User getUser(String username) {
@@ -38,7 +46,7 @@ public enum UserManager {
         }
 
         this.users.put(user.username, user);
-        CapeManager.INSTANCE.addCapes(user.capes);
+        CapeManager.getInstance().addCapes(user.capes);
     }
 
     public void addUsers(Set<User> users) throws NullPointerException {
@@ -62,7 +70,7 @@ public enum UserManager {
     public User parse(String user, Object cape) {
         User userInstance = new User(user);
 
-        ICape capeInstance = (cape instanceof ICape) ? (ICape)cape : CapeManager.INSTANCE.parse(user, cape.toString());
+        ICape capeInstance = (cape instanceof ICape) ? (ICape)cape : CapeManager.getInstance().parse(user, cape.toString());
 
         if (capeInstance != null) {
             userInstance.capes.add(capeInstance);

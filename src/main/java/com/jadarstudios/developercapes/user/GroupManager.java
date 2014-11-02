@@ -19,21 +19,29 @@ import java.util.Map;
  * 
  * @author jadar
  */
-public enum GroupManager {
-    INSTANCE;
+public class GroupManager {
+
+    protected static GroupManager instance;
 
     private HashMap<String, Group> groups;
 
-    private GroupManager() {
+    public GroupManager() {
         this.groups = new HashMap<String, Group>();
+    }
+
+    public static GroupManager getInstance() {
+        if (instance == null) {
+            instance = new GroupManager();
+        }
+        return instance;
     }
 
     public void addGroup(Group group) {
         groups.put(group.name, group);
 
         try {
-            UserManager.INSTANCE.addUsers(new HashSet<User>(group.users.values()));
-            CapeManager.INSTANCE.addCape(group.cape);
+            UserManager.getInstance().addUsers(new HashSet<User>(group.users.values()));
+            CapeManager.getInstance().addCape(group.cape);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,10 +74,10 @@ public enum GroupManager {
         ArrayList users = (ArrayList)usersObj;
         String capeUrl = (String)capeUrlObj;
 
-        group.cape = CapeManager.INSTANCE.parse(name, capeUrl);
+        group.cape = CapeManager.getInstance().parse(name, capeUrl);
 
         for (Object obj : users) {
-            User user = UserManager.INSTANCE.parse((String)obj, group.cape);
+            User user = UserManager.getInstance().parse((String)obj, group.cape);
             if (user != null) {
                 group.addUser(user);
             }

@@ -24,7 +24,7 @@ public class RenderEventHandler {
     public void renderPlayer(RenderPlayerEvent.Specials.Pre event) {
         AbstractClientPlayer player = (AbstractClientPlayer) event.entityPlayer;
 
-        UserManager manager = UserManager.INSTANCE;
+        UserManager manager = UserManager.getInstance();
         User user = manager.getUser(player.getCommandSenderName());
         if (user == null) return;
 
