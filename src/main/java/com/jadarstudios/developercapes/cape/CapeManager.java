@@ -18,13 +18,21 @@ import java.util.HashMap;
  * 
  * @author jadar
  */
-public enum CapeManager {
-    INSTANCE;
+public class CapeManager {
+
+    protected static CapeManager instance;
 
     private HashMap<String, ICape> capes;
 
-    private CapeManager() {
+    public CapeManager() {
         this.capes = new HashMap<String, ICape>();
+    }
+
+    public static CapeManager getInstance() {
+        if (instance == null) {
+            instance = new CapeManager();
+        }
+        return instance;
     }
 
     public void addCape(ICape cape) {
@@ -52,7 +60,7 @@ public enum CapeManager {
     public ICape parse(String name, Object object) {
         ICape cape = null;
         if(object instanceof String || object instanceof URL){
-        	parse(name, object.toString());
+        	cape = parse(name, object.toString());
         }else{
         	DevCapes.logger.error(String.format("Cape, %s, could not be parsed because it is not in an accepted format!", object));
         }

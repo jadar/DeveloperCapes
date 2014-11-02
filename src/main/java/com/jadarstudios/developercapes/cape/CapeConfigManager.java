@@ -17,8 +17,10 @@ import com.jadarstudios.developercapes.user.GroupManager;
 import com.jadarstudios.developercapes.user.User;
 import com.jadarstudios.developercapes.user.UserManager;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.BitSet;
 import java.util.Map;
 
@@ -27,9 +29,10 @@ import java.util.Map;
  * 
  * @author jadar
  */
-public enum CapeConfigManager {
-    INSTANCE;
+public class CapeConfigManager {
 
+    protected static CapeConfigManager instance;
+    
     protected static BitSet availableIds = new BitSet(256);
     protected HashBiMap<Integer, CapeConfig> configs;
 
@@ -37,8 +40,15 @@ public enum CapeConfigManager {
         availableIds.clear(availableIds.size());
     }
 
-    private CapeConfigManager() {
+    public CapeConfigManager() {
         configs = HashBiMap.create();
+    }
+
+    public static CapeConfigManager getInstance() {
+        if (instance == null) {
+            instance = new CapeConfigManager();
+        }
+        return instance;
     }
 
     public void addConfig(int id, CapeConfig config) {
@@ -51,7 +61,7 @@ public enum CapeConfigManager {
     private void addUsers(Map<String, User> users){
     	try {
             for (User u : users.values()) {
-                UserManager.INSTANCE.addUser(u);
+                UserManager.getInstance().addUser(u);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,7 +70,7 @@ public enum CapeConfigManager {
     private void addGroups(Map<String, Group> groups){
     	try {
             for (Group g : groups.values()) {
-                GroupManager.INSTANCE.addGroup(g);
+                GroupManager.getInstance().addGroup(g);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,14 +133,14 @@ public enum CapeConfigManager {
     }
     
     private void parseGroup(CapeConfig config, String node, Map group){
-        Group g = GroupManager.INSTANCE.parse(node, group);
+        Group g = GroupManager.getInstance().parse(node, group);
         if (g != null) {
         	config.groups.put(g.name, g);
         }
     }
     
     private void parseUser(CapeConfig config, String node, String user){
-    	User u = UserManager.INSTANCE.parse(node, user);
+    	User u = UserManager.getInstance().parse(node, user);
         if (u != null) {
         	config.users.put(node, u);
         }
@@ -140,8 +150,13 @@ public enum CapeConfigManager {
     	CapeConfig instance = null;
     	if (is != null) {
     		try {
-    			String json = new String(ByteStreams.toByteArray(is));
-    			instance = INSTANCE.parse(json);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                String json = "";
+                while (reader.ready()) {
+                    json += reader.readLine();
+                }
+
+                instance = this.parse(json);
     		} catch (IOException e) {
     			DevCapes.logger.error("Failed to read the input stream!");
     			e.printStackTrace();
