@@ -1,3 +1,9 @@
+/**
+ * DeveloperCapes by Jadar
+ * License: MIT License
+ * (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
+ * version 4.0.0.x
+ */
 package com.jadarstudios.developercapes.user;
 
 import com.jadarstudios.developercapes.DevCapes;
@@ -8,6 +14,8 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
+ * Users can not be trusted to put capes on by themselves
+ * 
  * @author jadar
  */
 public enum UserManager {
@@ -33,33 +41,28 @@ public enum UserManager {
         CapeManager.INSTANCE.addCapes(user.capes);
     }
 
-    public void addUsers(Set<User> users) throws Exception {
+    public void addUsers(Set<User> users) throws NullPointerException {
         for (User u : users) {
             this.addUser(u);
         }
     }
 
-    public User newInstance(String username) {
-        User instance = null;
+    public User newUser(String username) {
+        User user = null;
         if (this.users.containsKey(username)) {
-            instance = this.getUser(username);
+            user = this.getUser(username);
         } else {
-            instance = new User(username);
-            this.users.put(username, instance);
+            user = new User(username);
+            this.users.put(username, user);
         }
 
-        return instance;
+        return user;
     }
 
-    public User parse(Object user, Object cape) {
-        User userInstance = null;
-        if (!(user instanceof String)) {
-            DevCapes.logger.error(String.format("User %s could not be parsed because it was not a String!", user.toString()));
-            return userInstance;
-        }
+    public User parse(String user, Object cape) {
+        User userInstance = new User(user);
 
-        userInstance = new User((String) user);
-        ICape capeInstance = (cape instanceof ICape) ? (ICape)cape : CapeManager.INSTANCE.parse((String) user, cape);
+        ICape capeInstance = (cape instanceof ICape) ? (ICape)cape : CapeManager.INSTANCE.parse(user, cape.toString());
 
         if (capeInstance != null) {
             userInstance.capes.add(capeInstance);

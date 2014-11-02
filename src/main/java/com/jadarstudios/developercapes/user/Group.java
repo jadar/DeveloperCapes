@@ -1,3 +1,9 @@
+/**
+ * DeveloperCapes by Jadar
+ * License: MIT License
+ * (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
+ * version 4.0.0.x
+ */
 package com.jadarstudios.developercapes.user;
 
 import com.jadarstudios.developercapes.cape.ICape;
@@ -6,6 +12,8 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
+ * This represents a group of players that share a cape
+ * 
  * @author jadar
  */
 public class Group {

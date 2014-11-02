@@ -1,3 +1,9 @@
+/**
+ * DeveloperCapes by Jadar
+ * License: MIT License
+ * (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
+ * version 4.0.0.x
+ */
 package com.jadarstudios.developercapes;
 
 import com.jadarstudios.developercapes.cape.ICape;
@@ -8,6 +14,8 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 
 /**
+ * This is not the class you are looking for.
+ * 
  * @author jadar
  */
 public class RenderEventHandler {
@@ -28,5 +36,4 @@ public class RenderEventHandler {
             cape.loadTexture(player);
         }
     }
-
 }

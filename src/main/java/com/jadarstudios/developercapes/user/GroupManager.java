@@ -1,3 +1,9 @@
+/**
+ * DeveloperCapes by Jadar
+ * License: MIT License
+ * (https://raw.github.com/jadar/DeveloperCapes/master/LICENSE)
+ * version 4.0.0.x
+ */
 package com.jadarstudios.developercapes.user;
 
 import com.jadarstudios.developercapes.DevCapes;
@@ -9,6 +15,8 @@ import java.util.HashSet;
 import java.util.Map;
 
 /**
+ * All groups have to be managed
+ * 
  * @author jadar
  */
 public enum GroupManager {
@@ -36,7 +44,7 @@ public enum GroupManager {
     }
 
 
-    public Group newInstance(String name) {
+    public Group newGroup(String name) {
         if (this.getGroup(name) != null) {
             return this.getGroup(name);
         }
@@ -61,7 +69,7 @@ public enum GroupManager {
         group.cape = CapeManager.INSTANCE.parse(name, capeUrl);
 
         for (Object obj : users) {
-            User user = UserManager.INSTANCE.parse(obj, group.cape);
+            User user = UserManager.INSTANCE.parse((String)obj, group.cape);
             if (user != null) {
                 group.addUser(user);
             }
