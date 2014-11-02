@@ -57,5 +57,4 @@ public class StaticCape extends AbstractCape {
         this.name = name;
         this.location = new ResourceLocation("DevCapes/" + name);
     }
-
 }

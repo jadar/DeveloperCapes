@@ -10,8 +10,8 @@ import com.jadarstudios.developercapes.DevCapes;
 import com.jadarstudios.developercapes.cape.CapeManager;
 import com.jadarstudios.developercapes.cape.ICape;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Set;
 
 /**
  * Users can not be trusted to put capes on by themselves
@@ -41,15 +41,14 @@ public class UserManager {
 
     public void addUser(User user) throws NullPointerException {
         if (user == null || user.username == null || user.username.isEmpty()) {
-            DevCapes.logger.error("Cannot add a null user.");
-            throw new NullPointerException();
+            throw new NullPointerException("Cannot add a null user!");
         }
 
         this.users.put(user.username, user);
         CapeManager.getInstance().addCapes(user.capes);
     }
 
-    public void addUsers(Set<User> users) throws NullPointerException {
+    public void addUsers(Collection<User> users) throws NullPointerException {
         for (User u : users) {
             this.addUser(u);
         }
