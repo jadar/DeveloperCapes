@@ -23,16 +23,7 @@ public class DevCapesDemo {
     public void init(FMLInitializationEvent event) {
 
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-            InputStream stream = null;
-            try {
-                stream = DevCapes.getInstance().getStreamForURL(new URL("https://dl.dropboxusercontent.com/u/22865035/ModHosting/capes/capes.json"));
-                CapeConfig config = CapeConfigManager.INSTANCE.parseFromStream(stream);
-                if (config != null)
-                CapeConfigManager.INSTANCE.addConfig(CapeConfigManager.getUniqueId(), config);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-
+                DevCapes.getInstance().registerConfig("https://dl.dropboxusercontent.com/u/22865035/ModHosting/capes/capes.json");
         }
 
 
