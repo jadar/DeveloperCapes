@@ -7,7 +7,6 @@
 package com.jadarstudios.developercapes.cape;
 
 import com.google.common.collect.HashBiMap;
-import com.google.common.io.ByteStreams;
 import com.google.common.primitives.UnsignedBytes;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -58,20 +57,17 @@ public class CapeConfigManager {
         addGroups(config.groups);
     }
     
-    private void addUsers(Map<String, User> users){
+    protected void addUsers(Map<String, User> users){
     	try {
-            for (User u : users.values()) {
-                UserManager.getInstance().addUser(u);
-            }
+    		UserManager.getInstance().addUsers(users.values());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    private void addGroups(Map<String, Group> groups){
+    
+    protected void addGroups(Map<String, Group> groups){
     	try {
-            for (Group g : groups.values()) {
-                GroupManager.getInstance().addGroup(g);
-            }
+    		GroupManager.getInstance().addGroups(groups.values());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -132,14 +128,14 @@ public class CapeConfigManager {
         return instance;
     }
     
-    private void parseGroup(CapeConfig config, String node, Map group){
+    protected void parseGroup(CapeConfig config, String node, Map group){
         Group g = GroupManager.getInstance().parse(node, group);
         if (g != null) {
         	config.groups.put(g.name, g);
         }
     }
     
-    private void parseUser(CapeConfig config, String node, String user){
+    protected void parseUser(CapeConfig config, String node, String user){
     	User u = UserManager.getInstance().parse(node, user);
         if (u != null) {
         	config.users.put(node, u);

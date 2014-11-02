@@ -10,8 +10,8 @@ import com.jadarstudios.developercapes.DevCapes;
 import com.jadarstudios.developercapes.cape.CapeManager;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -40,13 +40,19 @@ public class GroupManager {
         groups.put(group.name, group);
 
         try {
-            UserManager.getInstance().addUsers(new HashSet<User>(group.users.values()));
+            UserManager.getInstance().addUsers(group.users.values());
             CapeManager.getInstance().addCape(group.cape);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
+    public void addGroups(Collection<Group> groups) {
+		for (Group g : groups) {
+            GroupManager.getInstance().addGroup(g);
+        }
+	}
+    
     public Group getGroup(String capeName) {
         return groups.get(capeName);
     }
