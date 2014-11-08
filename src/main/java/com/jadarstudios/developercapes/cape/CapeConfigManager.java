@@ -146,11 +146,7 @@ public class CapeConfigManager {
     	CapeConfig instance = null;
     	if (is != null) {
     		try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                String json = "";
-                while (reader.ready()) {
-                    json += reader.readLine();
-                }
+                 String json = new String(ByteStreams.toByteArray(is));
 
                 instance = this.parse(json);
     		} catch (IOException e) {
