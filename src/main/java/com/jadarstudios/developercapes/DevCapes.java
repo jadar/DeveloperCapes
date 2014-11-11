@@ -128,15 +128,32 @@ public class DevCapes {
      * @return The id of the registered config
      */
     public int registerConfig(URL jsonUrl) {
-        InputStream is = this.getStreamForURL(jsonUrl);
-        CapeConfig config = CapeConfigManager.getInstance().parse(is);
         int id = -1;
+        InputStream is = this.getStreamForURL(jsonUrl);
+
+        if (is == null) {
+            DevCapes.logger.error(String.format("Unable to establish a connection to the server, %s", jsonUrl.getHost()));
+            return id;
+        }
+
+        CapeConfig config = CapeConfigManager.getInstance().parse(is);
+
         try {
             id = CapeConfigManager.getUniqueId();
             CapeConfigManager.getInstance().addConfig(id, config);
         } catch (CapeConfigManager.InvalidCapeConfigIdException e) {
             e.printStackTrace();
         }
+
+        silentClose(is);
+
         return id;
+    }
+
+    private static void silentClose(InputStream is) {
+        try {
+            is.close();
+        } catch (IOException ignored) {
+        }
     }
 }

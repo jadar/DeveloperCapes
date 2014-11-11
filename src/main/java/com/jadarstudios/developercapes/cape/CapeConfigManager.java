@@ -159,6 +159,7 @@ public class CapeConfigManager {
 
     public static class InvalidCapeConfigIdException extends Exception {
         public InvalidCapeConfigIdException() {
+            super();
         }
 
         public InvalidCapeConfigIdException(String s) {
