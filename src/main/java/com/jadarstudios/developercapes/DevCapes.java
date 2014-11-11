@@ -129,9 +129,14 @@ public class DevCapes {
      */
     public int registerConfig(URL jsonUrl) {
         InputStream is = this.getStreamForURL(jsonUrl);
-        CapeConfig config = CapeConfigManager.getInstance().parseFromStream(is);
-        int id = CapeConfigManager.getUniqueId();
-        CapeConfigManager.getInstance().addConfig(id, config);
+        CapeConfig config = CapeConfigManager.getInstance().parse(is);
+        int id = -1;
+        try {
+            id = CapeConfigManager.getUniqueId();
+            CapeConfigManager.getInstance().addConfig(id, config);
+        } catch (CapeConfigManager.InvalidCapeConfigIdException e) {
+            e.printStackTrace();
+        }
         return id;
     }
 }
