@@ -1,15 +1,13 @@
 Developer Capes
 =============
 
-#####Notice: Usage changed in version 3. Please refer below to see how to set up DevCapes now.
+###Notice: This project is no longer actively maintained. You are free to fork, update, and use it as the license permits. Thank you.
 
 ####Version: 3.4.1.x
 
 A Minecraft library for adding Developer/Tester only capes!
 Use this to add tester or developer only capes to your mod!
 Developer Capes reads a text file off a web server, public Dropbox folder, or a raw GitHub file. As long as it is not a download site, (such as MediaFire,) it should work.
-
-*Note: Previously called DeveloperCapesAPI, DeveloperCapes was renamed because Jadar realized he was stupid. And that this is a library.*
 
 ### Table of Contents  
 [Links](#links)  
