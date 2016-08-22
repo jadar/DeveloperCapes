@@ -15,7 +15,6 @@ import com.jadarstudios.developercapes.user.Group;
 import com.jadarstudios.developercapes.user.GroupManager;
 import com.jadarstudios.developercapes.user.User;
 import com.jadarstudios.developercapes.user.UserManager;
-import com.javafx.tools.doclets.internal.toolkit.util.DocFinder;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.io.BufferedReader;

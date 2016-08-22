@@ -40,11 +40,11 @@ public class UserManager {
     }
 
     public void addUser(User user) throws NullPointerException {
-        if (user == null || user.username == null || user.username.isEmpty()) {
+        if (user == null || user.userUUID == null || user.userUUID.isEmpty()) {
             throw new NullPointerException("Cannot add a null user!");
         }
 
-        this.users.put(user.username, user);
+        this.users.put(user.userUUID, user);
         CapeManager.getInstance().addCapes(user.capes);
     }
 

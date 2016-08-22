@@ -30,7 +30,7 @@ public class Group {
     public void addUser(User user) {
         if (!this.users.containsValue(user)) {
             user.capes.add(this.cape);
-            this.users.put(user.username, user);
+            this.users.put(user.userUUID, user);
         }
     }
 

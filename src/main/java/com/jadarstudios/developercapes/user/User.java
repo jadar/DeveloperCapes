@@ -19,10 +19,10 @@ import java.util.List;
 public class User {
 
     public List<ICape> capes;
-    public final String username;
+    public final String userUUID;
 
-    public User(String username) {
-        this.username = username;
+    public User(String userUUID) {
+        this.userUUID = userUUID;
         this.capes = new ArrayList<ICape>();
     }
 }

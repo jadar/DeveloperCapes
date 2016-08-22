@@ -48,7 +48,7 @@ sourceSets {
 
 // minecraft properteis
 minecraft {
-	version = "1.7.10-10.13.0.1160"
+	version = "1.7.10-10.13.4.1558-1.7.10"
 }
 
 //buildNumber is deprecated
