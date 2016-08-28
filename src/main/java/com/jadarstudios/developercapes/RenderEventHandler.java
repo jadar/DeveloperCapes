@@ -25,7 +25,7 @@ public class RenderEventHandler {
         AbstractClientPlayer player = (AbstractClientPlayer) event.entityPlayer;
 
         UserManager manager = UserManager.getInstance();
-        User user = manager.getUser(player.getCommandSenderName());
+        User user = manager.getUser(player.getUniqueID().toString());
         if (user == null) return;
 
         ICape cape = user.capes.get(0);
