@@ -44,17 +44,19 @@ DevCapes.getInstance().registerConfig($CAPES_JSON, $IDENTIFIER);
 
 `$CAPES_JSON` is the `URL` (in `Object` or `String` form,) `InputStream`, or `File` to a text file hosted on a server, Dropbox, or GitHub, that has all the data Developer Capes needs to add your capes formatted in JSON. `$IDENTIFIER` is a unique mod identifier so DevCapes can keep one mod's groups separate from the other. 
 
+Instead of usernames, you can now use formatted user UUIDs. Formatted user UUIDs can be pulled out manually through [MCUUID.NET](http://mcuuid.net/), or through a json file using [MCAPI](http://mcapi.ca/examples/uuid-api).
+
 The JSON for the config looks like this:
 ```json
 {
     "Group1": {
         "capeUrl": "http://www.example.com/group1_cape.png",
         "users": [
-            "JadarMC",
-            "MinerID642"
+            "65a88e89-a337-4c64-964e-6274439204cf",
+            "0bdf9bba-d329-47b5-b86f-52347cfd8cf1"
         ]
     },
-    "Captain_Shadows": "http://www.example.com/captain_cape.png"
+    "d6e04cf3-bcaa-46fa-bc14-bba92a499545": "http://www.example.com/captain_cape.png"
 }
 ```
   You are going to want to make sure there is a comma after every element in the array, or string, etc, -except- when it is the last one in it's scope. If you do the logs will make this very clear.
