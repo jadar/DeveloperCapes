@@ -2,9 +2,9 @@
   "ExampleGroup1": {
     "capeUrl": "http://www.myurl.com/DEV_CAPE.png",
     "users": [
-      "ExampleUser1",
-      "ExampleUser2"
+      "05910308-229d-46bb-a466-e5574dba490c",
+      "6b4a177a-54ee-4dd6-a50b-d993503892c1"
     ]
   },
-  "ExampleUser3": "http://www.myurl.com/PERSONAL_CAPE.png"
+  "2fb94c76-d968-4f25-a7cc-91fdccd23868": "http://www.myurl.com/PERSONAL_CAPE.png"
 }
